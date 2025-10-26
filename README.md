@@ -1,46 +1,11 @@
-<h1 align="center">
-  Hey, I'm Dylan 
-  <span class="wave">👋</span>
-</h1>
-
-<style>
-@keyframes wave-animation {
-  0% { transform: rotate(0deg); }
-  10% { transform: rotate(14deg); }
-  20% { transform: rotate(-8deg); }
-  30% { transform: rotate(14deg); }
-  40% { transform: rotate(-4deg); }
-  50% { transform: rotate(10deg); }
-  60% { transform: rotate(0deg); }
-  100% { transform: rotate(0deg); }
-}
-.wave {
-  display: inline-block;
-  transform-origin: 70% 70%;
-  animation: wave-animation 2.5s infinite;
-}
-</style>
-
 <p align="center">
   <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&size=24&duration=3000&pause=1000&color=00BCD4&center=true&vCenter=true&width=600&lines=%F0%9F%8E%A7+Music+Producer;%F0%9F%A7%A0+Developer;%F0%9F%8E%A8+Visual+Storyteller" alt="Typing SVG" />
 </p>
 
-<p align="center">
-  <em>I build tools, make sounds, and chase meaning in the chaos.</em>
-</p>
-
----
-
-### 🧩 Current Project
-<p align="center">
-  <img src="https://img.shields.io/badge/NOMAD_DAW-In_Development-00bcd4?style=for-the-badge&logo=cplusplus&logoColor=white&labelColor=1b1b1f" />
-</p>
-
-<p align="center">
-  <img src="https://img.shields.io/badge/🎧_Music_Producer-Active-00bcd4?style=for-the-badge&labelColor=1b1b1f" />
-  <img src="https://img.shields.io/badge/🧠_Developer-Building-ff4081?style=for-the-badge&labelColor=1b1b1f" />
-  <img src="https://img.shields.io/badge/🎨_Visual_Storyteller-Creating-9c27b0?style=for-the-badge&labelColor=1b1b1f" />
-</p>
+<h1 align="center">
+  Hey, I'm Dylan 
+  <img src="https://raw.githubusercontent.com/abhisheknaiidu/abhisheknaiidu/master/wave.gif" width="35px" height="35px" alt="wave" />
+</h1>
 
 <p align="center">
   <em>I build tools, make sounds, and chase meaning in the chaos.</em>
