@@ -29,7 +29,7 @@
 
 ---
 
-### 🎧 Now Playing
+### Now Playing
 <p align="center">
   <img src="https://now-playing-6672.vercel.app" alt="Spotify Now Playing" width="400" />
 </p>
