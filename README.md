@@ -7,14 +7,14 @@
 
 ---
 
-### 🧩 Current Project
+### Current Project
 <p align="center">
   <img src="https://img.shields.io/badge/NOMAD_DAW-In_Development-00bcd4?style=for-the-badge&logo=cplusplus&logoColor=white&labelColor=1b1b1f" />
 </p>
 
 ---
 
-### 🚀 My Stats
+### My Stats
 <p align="center">
   <img src="https://github-readme-stats.vercel.app/api?username=currentsuspect&show_icons=true&theme=tokyonight&hide_border=true&bg_color=0d1117&title_color=00bcd4&icon_color=ff4081" height="165" />
   <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=currentsuspect&layout=compact&theme=tokyonight&hide_border=true&bg_color=0d1117&title_color=9c27b0" height="165" />
@@ -22,14 +22,14 @@
 
 ---
 
-### 🐍 Contribution Snake
+### Contributions
 <p align="center">
   <img src="https://raw.githubusercontent.com/currentsuspect/currentsuspect/main/github-user-contribution.svg" alt="Snake animation" />
 </p>
 
 ---
 
-### 🎧 Now Playing on Spotify
+### 🎧 Now Playing
 <p align="center">
   <img src="https://now-playing-6672.vercel.app" alt="Spotify Now Playing" width="400" />
 </p>
