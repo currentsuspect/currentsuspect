@@ -1,4 +1,10 @@
-<h1 align="center">👋 Hey, I'm Dylan</h1>
+<p align="center">
+  <a href="https://git.io/typing-svg">
+    <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&size=24&duration=3000&pause=1000&color=00BCD4&center=true&vCenter=true&width=600&lines=🎧+Music+Producer;🧠+Developer;🎨+Visual+Storyteller" alt="Typing SVG" />
+  </a>
+</p>
+
+<h1 align="center">Hey, I'm Dylan 👋</h1>
 
 <p align="center">
   <img src="https://img.shields.io/badge/🎧_Music_Producer-Active-00bcd4?style=for-the-badge&labelColor=1b1b1f" />
@@ -8,6 +14,13 @@
 
 <p align="center">
   <em>I build tools, make sounds, and chase meaning in the chaos.</em>
+</p>
+
+---
+
+### 🧩 Current Project
+<p align="center">
+  <img src="https://img.shields.io/badge/NOMAD_DAW-In_Development-00bcd4?style=for-the-badge&logo=cplusplus&logoColor=white&labelColor=1b1b1f" />
 </p>
 
 ---
