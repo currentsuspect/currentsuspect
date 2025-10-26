@@ -1,8 +1,3 @@
-<div align="center">
-  <h1>Hey, I'm Dylan 👋</h1>
-  <img src="https://raw.githubusercontent.com/abhisheknaiidu/abhisheknaiidu/master/wave.gif" width="35" height="35" alt="wave">
-</div>
-
 <p align="center">
   <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&size=24&duration=3000&pause=1000&color=00BCD4&center=true&vCenter=true&width=600&lines=%F0%9F%8E%A7+Music+Producer;%F0%9F%A7%A0+Developer;%F0%9F%8E%A8+Visual+Storyteller" alt="Typing SVG" />
 </p>
