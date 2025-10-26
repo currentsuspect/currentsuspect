@@ -13,7 +13,7 @@ I build tools, make sounds, and chase meaning in the chaos.
 ---
 
 ### 🐍 Contribution Snake
-![Snake animation](https://github.com/currentsuspect/currentsuspect/blob/output/github-contribution-grid-snake.svg)
+![Snake animation](https://raw.githubusercontent.com/CurrentSuspect/CurrentSuspect/output/github-contribution-grid-snake.svg)
 
 ---
 
