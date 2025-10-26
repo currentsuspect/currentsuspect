@@ -18,4 +18,4 @@ I build tools, make sounds, and chase meaning in the chaos.
 ---
 
 ### 🎧 Now Playing on Spotify
-![Spotify Now Playing](https://now-playing.vercel.app?background_color=181414&border_color=1DB954)
+![Spotify Now Playing](https://now-playing-6672.vercel.app)
