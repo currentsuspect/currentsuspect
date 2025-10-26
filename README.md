@@ -6,21 +6,16 @@ I build tools, make sounds, and chase meaning in the chaos.
 ---
 
 ### 🚀 My Stats
-![GitHub Stats](https://github-readme-stats.vercel.app/api?username=CurrentSuspect&show_icons=true&theme=tokyonight)
+![GitHub Stats](https://github-readme-stats.vercel.app/api?username=currentsuspect&show_icons=true&theme=tokyonight)
 
-![Top Languages](https://github-readme-stats.vercel.app/api/top-langs/?username=CurrentSuspect&layout=compact&theme=tokyonight)
+![Top Languages](https://github-readme-stats.vercel.app/api/top-langs/?username=currentsuspect&layout=compact&theme=tokyonight)
 
 ---
 
 ### 🐍 Contribution Snake
-![Snake animation](https://github.com/CurrentSuspect/CurrentSuspect/blob/output/github-contribution-grid-snake.svg)
-
----
-
-### 🦊 My Pet
-<img src="https://github.com/tonsky/FiraCode/raw/master/demos/monkey.gif" width="150">
+![Snake animation](https://github.com/currentsuspect/currentsuspect/blob/output/github-contribution-grid-snake.svg)
 
 ---
 
 ### 🎧 Now Playing on Spotify
-![Spotify Now Playing](https://now-playing-6672.vercel.app?background_color=181414&border_color=1DB954)
+![Spotify Now Playing](https://now-playing.vercel.app?background_color=181414&border_color=1DB954)
