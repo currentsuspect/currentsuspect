@@ -1,12 +1,10 @@
-<p align="center">
-  <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&size=24&duration=3000&pause=1000&color=00BCD4&center=true&vCenter=true&width=600&lines=%F0%9F%8E%A7+Music+Producer;%F0%9F%A7%A0+Developer;%F0%9F%8E%A8+Visual+Storyteller" alt="Typing SVG" />
-</p>
-
 <h1 align="center">
   Hey, I'm Dylan 
   <img src="https://raw.githubusercontent.com/abhisheknaiidu/abhisheknaiidu/master/wave.gif" width="35px" height="35px" alt="wave" />
 </h1>
-
+<p align="center">
+  <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&size=24&duration=3000&pause=1000&color=00BCD4&center=true&vCenter=true&width=600&lines=%F0%9F%8E%A7+Music+Producer;%F0%9F%A7%A0+Developer;%F0%9F%8E%A8+Visual+Storyteller" alt="Typing SVG" />
+</p>
 <p align="center">
   <em>I build tools, make sounds, and chase meaning in the chaos.</em>
 </p>
