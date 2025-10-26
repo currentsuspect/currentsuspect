@@ -23,4 +23,4 @@ I build tools, make sounds, and chase meaning in the chaos.
 ---
 
 ### 🎧 Now Playing on Spotify
-[![Spotify](https://novatorem-current-suspect.vercel.app/api/spotify)](https://open.spotify.com/user/YOUR_SPOTIFY_ID)
+![Spotify Now Playing](http://localhost:5000)
