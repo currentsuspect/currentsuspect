@@ -26,7 +26,7 @@ jobs:
           outputs: |
             github-snake.svg?palette=github
             github-snake-dark.svg?palette=github-dark
-            snake.gif?palette=github&color_snake=orange&color_dots=#bfd6f6,#8dbdff,#64a1f4,#4b91f1,#3c7dd9
+            snake.gif?color_snake=#FFFFFF&color_dots=#222222,#444444,#666666,#888888,#AAAAAA
 
       - name: Commit changes
         run: |
