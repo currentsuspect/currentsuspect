@@ -13,7 +13,9 @@ on:
 jobs:
   generate-snake:
     runs-on: ubuntu-latest
-    
+    permissions:
+      contents: write
+      
     steps:
     - name: Checkout repository
       uses: actions/checkout@v4
