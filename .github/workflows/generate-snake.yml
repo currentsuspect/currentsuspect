@@ -30,13 +30,12 @@ jobs:
           snake.gif?palette=github&color_snake=orange&color_dots=#bfd6f6,#8dbdff,#64a1f4,#4b91f1,#3c7dd9
     
     - name: Commit changes
-      if: true
       run: |
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
         git add .
-        git diff --staged --quiet || git commit -m "Update snake contributions on ${DATE}"
-        git push
+        git diff --staged --quiet || git commit -m "Update snake contributions on $(date)"
+        git push https://x-access-token:${{ secrets.PAT_TOKEN }}@github.com/currentsuspect/currentsuspect.git
         
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
