@@ -7,7 +7,7 @@
 
 ---
 
-### 🚀 Active Projects
+### 🎯 Currently Vibing With
 
 <p align="center">
   <a href="https://github.com/currentsuspect/resonance">
@@ -23,16 +23,7 @@
 
 ---
 
-### 📊 My Stats
-
-<p align="center">
-  <img src="https://github-readme-stats.vercel.app/api?username=currentsuspect&show_icons=true&theme=tokyonight&hide_border=true&bg_color=0d1117&title_color=00bcd4&icon_color=ff4081" height="165" />
-  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=currentsuspect&layout=compact&theme=tokyonight&hide_border=true&bg_color=0d1117&title_color=9c27b0" height="165" />
-</p>
-
----
-
-### 🛠️ Tech Stack
+### 🛠️ Tools I Break Things With
 
 <p align="center">
   <img src="https://img.shields.io/badge/Flutter-02569B?style=flat-square&logo=flutter&logoColor=white" />
@@ -40,42 +31,62 @@
   <img src="https://img.shields.io/badge/C++-00599C?style=flat-square&logo=cplusplus&logoColor=white" />
   <img src="https://img.shields.io/badge/Next.js-000000?style=flat-square&logo=next.js&logoColor=white" />
   <img src="https://img.shields.io/badge/Firebase-FFCA28?style=flat-square&logo=firebase&logoColor=black" />
-  <img src="https://img.shields.io/badge/Azure-0078D4?style=flat-square&logo=microsoftazure&logoColor=white" />
   <img src="https://img.shields.io/badge/Tailwind-06B6D4?style=flat-square&logo=tailwindcss&logoColor=white" />
+  <img src="https://img.shields.io/badge/Azure-0078D4?style=flat-square&logo=microsoftazure&logoColor=white" />
 </p>
 
 ---
 
-### 🏗️ Infrastructure
+### 📊 The Numbers
 
 <p align="center">
-  <a href="https://github.com/currentsuspect/currentsuspect">
-    <img src="https://img.shields.io/badge/Status_Page-Uptime_Kuma-3b82f6?style=for-the-badge&logo=statuspage&logoColor=white&labelColor=1b1b1f" />
+  <img src="https://github-readme-stats.vercel.app/api?username=currentsuspect&show_icons=true&theme=tokyonight&hide_border=true&bg_color=0d1117&title_color=00bcd4&icon_color=ff4081&count_private=true" height="165" />
+  <img src="https://github-readme-streak-stats.herokuapp.com/?user=currentsuspect&theme=tokyonight&hide_border=true&background=0d1117" height="165" />
+</p>
+
+<p align="center">
+  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=currentsuspect&layout=compact&theme=tokyonight&hide_border=true&bg_color=0d1117&title_color=9c27b0" height="150" />
+</p>
+
+---
+
+### 🎵 Now Playing
+
+<p align="center">
+  <a href="https://open.spotify.com/user/99niccur">
+    <img src="https://spotify-recently-played-readme.vercel.app/api?user=99niccur&count=3&unique=true" alt="Spotify recently played" />
   </a>
 </p>
 
-| Service | Status | URL |
-|---------|--------|-----|
-| Resonance API | 🟢 Online | `localhost:8088` |
-| Blueprint | 🟢 Online | `localhost:8090` |
-| mSpy Dashboard | 🟢 Online | `localhost:8091` |
-| Uptime Kuma | 🟢 Online | `localhost:3001` |
-| Gitea | 🟢 Online | `localhost:3002` |
+---
+
+### 🐍 Contribution Snake
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="dist/github-snake-dark.svg" />
+  <source media="(prefers-color-scheme: light)" srcset="dist/github-snake.svg" />
+  <img alt="github contribution grid snake animation" src="dist/github-snake.svg" />
+</picture>
 
 ---
 
-### 📈 Contribution Activity
+### 📝 Latest Activity
 
-![GitHub Activity Graph](https://github-readme-activity-graph.vercel.app/graph?username=currentsuspect&theme=tokyo-night&hide_border=true&bg_color=0d1117)
+<!--START_SECTION:activity-->
+<!--END_SECTION:activity-->
 
 ---
 
-### 📫 Connect
+### 📫 Let's Connect
 
 <p align="center">
   <a href="mailto:dylanmakori@gmail.com">
-    <img src="https://img.shields.io/badge/Email-Drop_a_line-EA4335?style=flat-square&logo=gmail&logoColor=white" />
+    <img src="https://img.shields.io/badge/Email-dylanmakori@gmail.com-EA4335?style=flat-square&logo=gmail&logoColor=white" />
   </a>
+</p>
+
+<p align="center">
+  <img src="https://komarev.com/ghpvc/?username=currentsuspect&color=00bcd4&style=flat-square" alt="Profile views" />
 </p>
 
 <p align="center">
