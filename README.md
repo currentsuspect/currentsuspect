@@ -40,22 +40,15 @@
 ### 📊 The Numbers
 
 <p align="center">
-  <img src="https://github-readme-stats.vercel.app/api?username=currentsuspect&show_icons=true&theme=tokyonight&hide_border=true&bg_color=0d1117&title_color=00bcd4&icon_color=ff4081&count_private=true" height="165" />
-  <img src="https://github-readme-streak-stats.herokuapp.com/?user=currentsuspect&theme=tokyonight&hide_border=true&background=0d1117" height="165" />
+  <img src="https://github-readme-stats.vercel.app/api?username=currentsuspect&show_icons=true&theme=tokyonight&hide_border=true&bg_color=0d1117&title_color=00bcd4&icon_color=ff4081&count_private=true&include_all_commits=true" height="180" alt="GitHub Stats" />
 </p>
 
 <p align="center">
-  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=currentsuspect&layout=compact&theme=tokyonight&hide_border=true&bg_color=0d1117&title_color=9c27b0" height="150" />
+  <img src="https://github-readme-streak-stats.herokuapp.com/?user=currentsuspect&theme=tokyonight&hide_border=true&background=0d1117&stroke=00bcd4&ring=ff4081&fire=ff4081&currStreakNum=00bcd4&sideNums=00bcd4&currStreakLabel=94a3b8&sideLabels=94a3b8" height="160" alt="GitHub Streak" />
 </p>
 
----
-
-### 🎵 Now Playing
-
 <p align="center">
-  <a href="https://open.spotify.com/user/99niccur">
-    <img src="https://spotify-recently-played-readme.vercel.app/api?user=99niccur&count=3&unique=true" alt="Spotify recently played" />
-  </a>
+  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=currentsuspect&layout=compact&theme=tokyonight&hide_border=true&bg_color=0d1117&title_color=9c27b0&hide=html,css" height="150" alt="Top Languages" />
 </p>
 
 ---
@@ -67,13 +60,6 @@
   <source media="(prefers-color-scheme: light)" srcset="dist/github-snake.svg" />
   <img alt="github contribution grid snake animation" src="dist/github-snake.svg" />
 </picture>
-
----
-
-### 📝 Latest Activity
-
-<!--START_SECTION:activity-->
-<!--END_SECTION:activity-->
 
 ---
 
