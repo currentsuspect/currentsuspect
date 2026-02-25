@@ -49,9 +49,6 @@
 ### 🏗️ Infrastructure
 
 <p align="center">
-  <a href="http://openclaw.currentsuspect.me">
-    <img src="https://img.shields.io/badge/OpenClaw-Online-22c55e?style=for-the-badge&logo=openai&logoColor=white&labelColor=1b1b1f" />
-  </a>
   <a href="https://github.com/currentsuspect/currentsuspect">
     <img src="https://img.shields.io/badge/Status_Page-Uptime_Kuma-3b82f6?style=for-the-badge&logo=statuspage&logoColor=white&labelColor=1b1b1f" />
   </a>
@@ -78,9 +75,6 @@
 <p align="center">
   <a href="mailto:dylanmakori@gmail.com">
     <img src="https://img.shields.io/badge/Email-Drop_a_line-EA4335?style=flat-square&logo=gmail&logoColor=white" />
-  </a>
-  <a href="https://openclaw.currentsuspect.me">
-    <img src="https://img.shields.io/badge/OpenClaw-Portal-6366f1?style=flat-square&logo=openai&logoColor=white" />
   </a>
 </p>
 
