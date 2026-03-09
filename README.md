@@ -1,59 +1,64 @@
 <p align="center">
-  <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&size=24&duration=3000&pause=1000&color=00BCD4&center=true&vCenter=true&width=600&lines=%F0%9F%8E%A7+Music+Producer;%F0%9F%A7%A0+Developer;%F0%9F%8E%A8+Visual+Storyteller" alt="Typing SVG" />
+  <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&size=24&duration=2800&pause=900&color=00BCD4&center=true&vCenter=true&width=760&lines=AI+systems+%26+workflow+builder;Creative+software+%26+infrastructure;Building+tools+that+reduce+friction" alt="Typing SVG" />
 </p>
+
 <p align="center">
-  <em>I build tools, make sounds, and chase meaning in the chaos.</em>
+  <em>I build systems that reduce friction — AI tools, workflow infrastructure, creative software, and environments that make execution feel lighter.</em>
 </p>
 
 ---
 
-### 🎯 Currently Vibing With
+## Current Focus
 
-<p align="center">
-  <a href="https://github.com/currentsuspect/resonance">
-    <img src="https://img.shields.io/badge/Resonance-LifeOS-6366f1?style=for-the-badge&logo=flutter&logoColor=white&labelColor=1b1b1f" />
-  </a>
-  <a href="https://github.com/currentsuspect/Aestra">
-    <img src="https://img.shields.io/badge/Aestra-DAW-00bcd4?style=for-the-badge&logo=cplusplus&logoColor=white&labelColor=1b1b1f" />
-  </a>
-  <a href="https://github.com/currentsuspect/plainsight-digital">
-    <img src="https://img.shields.io/badge/PlainSight-Digital_Studio-10b981?style=for-the-badge&logo=next.js&logoColor=white&labelColor=1b1b1f" />
-  </a>
-</p>
+- **[Resonance](https://github.com/currentsuspect/resonance)** — an AI companion / life operating system focused on continuity, notes, chat, and connection
+- **[Aestra](https://github.com/currentsuspect/Aestra)** — a C++ DAW built around reliable, pattern-based music production workflows
+- **[dotfiles](https://github.com/currentsuspect/dotfiles)** — cross-machine shell, VPS bootstrap, and operator-grade environment design for Arch + Ubuntu
 
 ---
 
-### 🛠️ Tools I Break Things With
+## Selected Projects
 
-<p align="center">
-  <img src="https://img.shields.io/badge/Flutter-02569B?style=flat-square&logo=flutter&logoColor=white" />
-  <img src="https://img.shields.io/badge/Python-3776AB?style=flat-square&logo=python&logoColor=white" />
-  <img src="https://img.shields.io/badge/C++-00599C?style=flat-square&logo=cplusplus&logoColor=white" />
-  <img src="https://img.shields.io/badge/Next.js-000000?style=flat-square&logo=next.js&logoColor=white" />
-  <img src="https://img.shields.io/badge/Firebase-FFCA28?style=flat-square&logo=firebase&logoColor=black" />
-  <img src="https://img.shields.io/badge/Tailwind-06B6D4?style=flat-square&logo=tailwindcss&logoColor=white" />
-  <img src="https://img.shields.io/badge/Azure-0078D4?style=flat-square&logo=microsoftazure&logoColor=white" />
-</p>
+### Resonance
+A personal space for connection — you and your AI companion, in sync. Built around continuity, conversation, notes, and the idea that an assistant should feel like a system with memory, not just a stateless chatbot.
+
+### Aestra
+A digital audio workstation in C++ focused on pattern-first creation, reliability, and long-term creative tooling. More obsession than side project at this point.
+
+### dotfiles
+A growing system for shell workflows, VPS bootstrap, machine setup, and reducing setup friction across Linux environments. Less “theme repo,” more “operator environment.”
 
 ---
 
-### 📊 The Numbers
+## How I Work
+
+- **Systems over hacks** — I like durable workflows more than one-off fixes
+- **Leverage over repetition** — if I do something twice, I start wanting tooling for it
+- **Speed with recoverability** — fast is great; fast and reversible is better
+- **Tools should feel good** — utility matters, but so does taste
+
+---
+
+## Stack
+
+**Build with**
+
+`Flutter` `Python` `C++` `Next.js` `Firebase` `FastAPI` `Bash`
+
+**Operate with**
+
+`Linux` `Azure` `Tailscale` `Cloudflare` `PM2` `GitHub Actions` `Docker`
+
+**Interested in**
+
+AI systems, automation, creative software, workflow design, infrastructure, security-minded tooling
+
+---
+
+## GitHub
 
 <p align="center">
   <img src="https://github-readme-stats.vercel.app/api?username=currentsuspect&show_icons=true&theme=tokyonight&hide_border=true&bg_color=0d1117&title_color=00bcd4&icon_color=ff4081&count_private=true&include_all_commits=true" height="180" alt="GitHub Stats" />
 </p>
-
-<p align="center">
-  <img src="https://github-readme-streak-stats.herokuapp.com/?user=currentsuspect&theme=tokyonight&hide_border=true&background=0d1117&stroke=00bcd4&ring=ff4081&fire=ff4081&currStreakNum=00bcd4&sideNums=00bcd4&currStreakLabel=94a3b8&sideLabels=94a3b8" height="160" alt="GitHub Streak" />
-</p>
-
-<p align="center">
-  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=currentsuspect&layout=compact&theme=tokyonight&hide_border=true&bg_color=0d1117&title_color=9c27b0&hide=html,css" height="150" alt="Top Languages" />
-</p>
-
----
-
-### 🐍 Contribution Snake
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="dist/github-snake-dark.svg" />
@@ -63,18 +68,14 @@
 
 ---
 
-### 📫 Let's Connect
+## Contact
 
 <p align="center">
   <a href="mailto:dylanmakori@gmail.com">
-    <img src="https://img.shields.io/badge/Email-dylanmakori@gmail.com-EA4335?style=flat-square&logo=gmail&logoColor=white" />
+    <img src="https://img.shields.io/badge/Email-dylanmakori%40gmail.com-EA4335?style=flat-square&logo=gmail&logoColor=white" />
   </a>
 </p>
 
 <p align="center">
-  <img src="https://komarev.com/ghpvc/?username=currentsuspect&color=00bcd4&style=flat-square" alt="Profile views" />
-</p>
-
-<p align="center">
-  <em>Building in public. Learning in private. Shipping daily.</em>
+  <em>Building in public when it helps. Building quietly when it matters.</em>
 </p>
