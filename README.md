@@ -10,7 +10,7 @@
 
 ## Current Focus
 
-- **[Resonance](https://github.com/currentsuspect/resonance)** — an AI companion / life operating system focused on continuity, notes, chat, and connection
+- **Resonance** — an AI companion / life operating system focused on continuity, notes, chat, and connection
 - **[Aestra](https://github.com/currentsuspect/Aestra)** — a C++ DAW built around reliable, pattern-based music production workflows
 - **[dotfiles](https://github.com/currentsuspect/dotfiles)** — cross-machine shell, VPS bootstrap, and operator-grade environment design for Arch + Ubuntu
 
@@ -19,12 +19,15 @@
 ## Selected Projects
 
 ### Resonance
+
 A personal space for connection — you and your AI companion, in sync. Built around continuity, conversation, notes, and the idea that an assistant should feel like a system with memory, not just a stateless chatbot.
 
 ### Aestra
+
 A digital audio workstation in C++ focused on pattern-first creation, reliability, and long-term creative tooling. More obsession than side project at this point.
 
 ### dotfiles
+
 A growing system for shell workflows, VPS bootstrap, machine setup, and reducing setup friction across Linux environments. Less “theme repo,” more “operator environment.”
 
 ---
@@ -72,7 +75,7 @@ AI systems, automation, creative software, workflow design, infrastructure, secu
 
 <p align="center">
   <a href="mailto:dylanmakori@gmail.com">
-    <img src="https://img.shields.io/badge/Email-dylanmakori%40gmail.com-EA4335?style=flat-square&logo=gmail&logoColor=white" />
+    <img src="https://img.shields.io/badge/Email-dylanmakori%40gmail.com-EA4335?style=flat-square&logo=gmail&logoColor=white" alt="Email: dylanmakori@gmail.com" />
   </a>
 </p>
 
