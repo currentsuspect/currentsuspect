@@ -60,7 +60,7 @@ AI systems, automation, creative software, workflow design, infrastructure, secu
 ## GitHub
 
 <p align="center">
-  <img src="https://github-readme-stats.vercel.app/api?username=currentsuspect&show_icons=true&theme=tokyonight&hide_border=true&bg_color=0d1117&title_color=00bcd4&icon_color=ff4081&count_private=true&include_all_commits=true" height="180" alt="GitHub Stats" />
+  <em>Keeping this section lightweight on purpose — contribution graph below, project signal above.</em>
 </p>
 
 <picture>
