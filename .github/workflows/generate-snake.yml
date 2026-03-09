@@ -6,8 +6,6 @@ permissions:
 on:
   push:
     branches: ["main", "master"]
-  pull_request:
-    branches: ["main", "master"]
   schedule:
     - cron: "0 0 1,15 * *"
 
@@ -34,4 +32,4 @@ jobs:
           git config --local user.name "GitHub Action"
           git add dist/
           git diff --staged --quiet || git commit -m "Update snake contributions on $(date)"
-          git push https://x-access-token:${{ secrets.PAT_TOKEN }}@github.com/currentsuspect/currentsuspect.git
+          git push
