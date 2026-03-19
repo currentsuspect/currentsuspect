@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Curated Consciousness — A Community for Intentional Men</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            background: #f6f7f8;
+            color: #1a1a1b;
+            line-height: 1.6;
+        }
+
+        .header {
+            background: #fff;
+            border-bottom: 1px solid #edeff1;
+            padding: 12px 20px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .logo {
+            font-size: 20px;
+            font-weight: 600;
+            color: #0079d3;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .logo::before {
+            content: "◉";
+            font-size: 24px;
+        }
+
+        .search-bar {
+            flex: 1;
+            max-width: 600px;
+        }
+
+        .search-bar input {
+            width: 100%;
+            padding: 8px 16px;
+            border: 1px solid #edeff1;
+            border-radius: 4px;
+            background: #f6f7f8;
+            font-size: 14px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-links a {
+            color: #1a1a1b;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .main-container {
+            max-width: 1200px;
+            margin: 20px auto;
+            display: grid;
+            grid-template-columns: 1fr 310px;
+            gap: 24px;
+            padding: 0 20px;
+        }
+
+        .content-area {
+            background: #fff;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+        }
+
+        .community-header {
+            padding: 20px;
+            border-bottom: 1px solid #edeff1;
+            background: linear-gradient(135deg, #f8f9fa 0%, #fff 100%);
+        }
+
+        .community-title {
+            font-size: 28px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .community-title::before {
+            content: "◉";
+            color: #0079d3;
+            font-size: 32px;
+        }
+
+        .community-stats {
+            display: flex;
+            gap: 24px;
+            font-size: 14px;
+            color: #7c7c7c;
+            margin-top: 12px;
+        }
+
+        .stat {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .community-description {
+            padding: 16px 20px;
+            font-size: 14px;
+            color: #4a4a4a;
+            border-bottom: 1px solid #edeff1;
+            background: #fafbfc;
+        }
+
+        .community-description p {
+            margin-bottom: 12px;
+        }
+
+        .community-description p:last-child {
+            margin-bottom: 0;
+        }
+
+        .pinned-post {
+            background: #fff8e1;
+            border-left: 4px solid #ffb300;
+            padding: 16px 20px;
+            border-bottom: 1px solid #edeff1;
+        }
+
+        .pinned-label {
+            font-size: 12px;
+            font-weight: 600;
+            color: #ffb300;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+        }
+
+        .pinned-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #1a1a1b;
+            margin-bottom: 8px;
+            cursor: pointer;
+        }
+
+        .pinned-title:hover {
+            color: #0079d3;
+        }
+
+        .pinned-preview {
+            font-size: 14px;
+            color: #4a4a4a;
+            line-height: 1.5;
+        }
+
+        .pinned-meta {
+            font-size: 12px;
+            color: #7c7c7c;
+            margin-top: 8px;
+        }
+
+        .categories-section {
+            padding: 20px;
+        }
+
+        .section-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: #1a1a1b;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 16px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #0079d3;
+            display: inline-block;
+        }
+
+        .category-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .category-item {
+            padding: 16px;
+            border: 1px solid #edeff1;
+            border-radius: 4px;
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+
+        .category-item:hover {
+            border-color: #0079d3;
+            background: #f6f7f8;
+        }
+
+        .category-name {
+            font-size: 16px;
+            font-weight: 600;
+            color: #0079d3;
+            margin-bottom: 4px;
+        }
+
+        .category-description {
+            font-size: 13px;
+            color: #4a4a4a;
+            line-height: 1.5;
+        }
+
+        .category-meta {
+            font-size: 12px;
+            color: #7c7c7c;
+            margin-top: 8px;
+        }
+
+        .recent-threads {
+            padding: 20px;
+            border-top: 1px solid #edeff1;
+        }
+
+        .thread-item {
+            padding: 16px 0;
+            border-bottom: 1px solid #edeff1;
+        }
+
+        .thread-item:last-child {
+            border-bottom: none;
+        }
+
+        .thread-title {
+            font-size: 15px;
+            font-weight: 600;
+            color: #1a1a1b;
+            margin-bottom: 6px;
+            cursor: pointer;
+        }
+
+        .thread-title:hover {
+            color: #0079d3;
+        }
+
+        .thread-preview {
+            font-size: 13px;
+            color: #4a4a4a;
+            line-height: 1.5;
+            margin-bottom: 8px;
+        }
+
+        .thread-meta {
+            font-size: 12px;
+            color: #7c7c7c;
+            display: flex;
+            gap: 16px;
+        }
+
+        .thread-tag {
+            background: #e8f4fd;
+            color: #0079d3;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 500;
+        }
+
+        .thread-tag.concerning {
+            background: #ffebee;
+            color: #c62828;
+        }
+
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .sidebar-card {
+            background: #fff;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+            padding: 16px;
+        }
+
+        .sidebar-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: #1a1a1b;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .rules-list {
+            list-style: none;
+        }
+
+        .rules-list li {
+            padding: 10px 0;
+            border-bottom: 1px solid #edeff1;
+            font-size: 13px;
+            color: #4a4a4a;
+            line-height: 1.5;
+        }
+
+        .rules-list li:last-child {
+            border-bottom: none;
+        }
+
+        .rules-list li strong {
+            color: #1a1a1b;
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .mod-list {
+            list-style: none;
+        }
+
+        .mod-list li {
+            padding: 8px 0;
+            font-size: 13px;
+            color: #4a4a4a;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .mod-list li::before {
+            content: "●";
+            color: #0079d3;
+            font-size: 8px;
+        }
+
+        .wiki-link {
+            display: block;
+            padding: 10px 0;
+            border-bottom: 1px solid #edeff1;
+            color: #0079d3;
+            text-decoration: none;
+            font-size: 13px;
+        }
+
+        .wiki-link:hover {
+            text-decoration: underline;
+        }
+
+        .wiki-link:last-child {
+            border-bottom: none;
+        }
+
+        .archive-note {
+            background: #f6f7f8;
+            padding: 12px;
+            border-radius: 4px;
+            font-size: 12px;
+            color: #7c7c7c;
+            margin-top: 12px;
+            font-style: italic;
+        }
+
+        .trending-topic {
+            padding: 10px 0;
+            border-bottom: 1px solid #edeff1;
+            font-size: 13px;
+        }
+
+        .trending-topic:last-child {
+            border-bottom: none;
+        }
+
+        .trending-topic a {
+            color: #0079d3;
+            text-decoration: none;
+        }
+
+        .trending-topic a:hover {
+            text-decoration: underline;
+        }
+
+        .trending-meta {
+            font-size: 11px;
+            color: #7c7c7c;
+            margin-top: 2px;
+        }
+
+        .quote-box {
+            background: #f6f7f8;
+            border-left: 3px solid #0079d3;
+            padding: 12px 16px;
+            margin: 16px 0;
+            font-style: italic;
+            color: #4a4a4a;
+        }
+
+        .quote-box p {
+            margin: 0;
+        }
+
+        .gardener-sig {
+            color: #0079d3;
+            font-weight: 600;
+            margin-top: 12px;
+            display: block;
+        }
+
+        @media (max-width: 960px) {
+            .main-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .sidebar {
+                order: 2;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <a href="#" class="logo">Curated Consciousness</a>
+            <div class="search-bar">
+                <input type="text" placeholder="Search for guidance, experiences, or calibration...">
+            </div>
+            <nav class="nav-links">
+                <a href="#">Home</a>
+                <a href="#">Popular</a>
+                <a href="#">Wiki</a>
+                <a href="#">Chat</a>
+            </nav>
+        </div>
+    </header>
+
+    <div class="main-container">
+        <main class="content-area">
+            <div class="community-header">
+                <h1 class="community-title">Curated Consciousness</h1>
+                <div class="community-stats">
+                    <span class="stat">👥 12,847 members</span>
+                    <span class="stat">● 847 online</span>
+                    <span class="stat">📅 Created Feb 2019</span>
+                    <span class="stat">🏆 Top 1% of communities</span>
+                </div>
+            </div>
+
+            <div class="community-description">
+                <p><strong>Curated Consciousness is a space for men who want to become more intentional about their relationships, their presence, and their impact on the world around them.</strong></p>
+                <p>We believe that modern relationships have become unbalanced—not through malice, but through drift. Our mission is to help men understand the dynamics at play, recalibrate their approach, and build connections that are mutually fulfilling rather than one-sided.</p>
+                <p>This isn't about manipulation. It's about awareness. It's about showing up fully. It's about becoming the kind of man who doesn't need to ask for attention because his presence commands it.</p>
+                <p><em>New here? Start with the pinned post below. Read before you post. Lurk before you speak. We're building something precise here.</em></p>
+            </div>
+
+            <div class="pinned-post">
+                <div class="pinned-label">📌 Start Here — Pinned by moderators</div>
+                <div class="pinned-title">Welcome to the Garden: A Primer on Frame, Presence, and Becoming Gravitational</div>
+                <div class="pinned-preview">
+                    <p>You're here because something shifted. Maybe slowly, maybe all at once. You were central in someone's life, and now you're not. You were seen, and now you're background. You're not imagining it. But you're probably misdiagnosing it...</p>
+                    <p>Most men think the problem is communication. Or effort. Or "spicing things up." They're wrong. The problem is <em>gravitational mass</em>. You've stopped being the thing she orbits. You've become optional. Convenient. Nice to have.</p>
+                    <p>We're not going to teach you tricks. We're going to teach you how to become the kind of man who doesn't need tricks. The kind of man who creates a <strong>frame</strong> so compelling that stepping outside it feels like loss.</p>
+                    <p>This takes time. It takes calibration. It takes reading the archives—not just the posts that make you feel good, but the ones that make you uncomfortable. The ones where men admit what they did, what worked, and what it cost.</p>
+                    <p><strong>The first rule:</strong> Never ask for validation here. We don't do pep talks. We do precision.</p>
+                    <p><strong>The second rule:</strong> If you're not willing to change your behavior before you understand why it works, leave now. The methods here require commitment. Half-measures create damage.</p>
+                    <p><strong>The third rule:</strong> What you learn here, you carry quietly. This is not a community for converts. It's a community for practitioners.</p>
+                    <p>Start with the sidebar. Read the glossary. Understand that words like "frame" and "baseline" and "calibration" have specific meanings here. Misuse them and you'll be corrected—publicly, if necessary.</p>
+                    <p>When you're ready, introduce yourself in the Weekly Check-in. Tell us where you are, not where you wish you were. We'll meet you there.</p>
+                    <p style="margin-top: 16px; color: #0079d3; font-weight: 600;">— TheGardener</p>
+                    <p style="font-size: 12px; color: #7c7c7c; margin-top: 8px;">Last edited 6 months ago • 4.2k upvotes • 847 comments</p>
+                </div>
+            </div>
+
+            <div class="categories-section">
+                <h2 class="section-title">Forum Categories</h2>
+                <div class="category-list">
+                    <div class="category-item">
+                        <div class="category-name">Foundation Work</div>
+                        <div class="category-description">The fundamentals: establishing baseline presence, understanding your current gravitational pull, and diagnosing where you stand in your relationships. For men just beginning their calibration. <em>No advanced techniques until you've logged 30 days of baseline observation.</em></div>
+                        <div class="category-meta">📊 3.2k threads • 847 new this week</div>
+                    </div>
+
+                    <div class="category-item">
+                        <div class="category-name">Frame Dynamics</div>
+                        <div class="category-description">Advanced discussion on maintaining frame under pressure, recovering from frame breaks, and establishing non-negotiable boundaries. Includes case studies of successful reframes and analysis of common collapse patterns. <em>Warning: This category contains unflinching truth about male behavior.</em></div>
+                        <div class="category-meta">📊 1.8k threads • 423 new this week</div>
+                    </div>
+
+                    <div class="category-item">
+                        <div class="category-name">The Long Game</div>
+                        <div class="category-description">Strategic patience and gradual calibration. For relationships in decline where sudden changes would trigger suspicion. Discussion of desensitization techniques, comfort zone expansion, and the psychology of slow adaptation. <em>Success stories from men who waited six months to see results.</em></div>
+                        <div class="category-meta">📊 967 threads • 156 new this week • 🔒 Restricted</div>
+                    </div>
+
+                    <div class="category-item">
+                        <div class="category-name">Aftermath & Reckoning</div>
+                        <div class="category-description">For men who've implemented changes and are navigating the consequences—intended and otherwise. Success stories, cautionary tales, and honest accounting of what this work costs. <em>Confession threads require 90-day account history.</em></div>
+                        <div class="category-meta">📊 542 threads • 89 new this week • 🔒 Restricted</div>
+                    </div>
+
+                    <div class="category-item">
+                        <div class="category-name">Theoretical Frameworks</div>
+                        <div class="category-description">Deep dives into attachment theory, behavioral psychology, and the philosophy of presence. Academic sources welcome. This is where we discuss <em>why</em> the methods work, not just how to apply them. <em>Debates encouraged. Ego-driven arguments removed.</em></div>
+                        <div class="category-meta">📊 1.1k threads • 234 new this week</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="recent-threads">
+                <h2 class="section-title">Recent Discussions</h2>
+                
+                <div class="thread-item">
+                    <div class="thread-title">She started therapy and suddenly I'm the problem in every story she tells her therapist</div>
+                    <div class="thread-preview">
+                        I've been implementing gradual frame changes for about 4 months. Nothing dramatic—just stopped asking permission for things I used to ask about, started doing more without announcing it first. Her response was to start therapy. Now every conversation we have gets filtered through "my therapist says..." and somehow I'm always the villain in those stories...
+                    </div>
+                    <div class="thread-meta">
+                        <span>Posted by Adjusting_Approach</span>
+                        <span>• 4 hours ago</span>
+                        <span>• 127 comments</span>
+                        <span class="thread-tag">Frame Dynamics</span>
+                    </div>
+                </div>
+
+                <div class="thread-item">
+                    <div class="thread-title">Success story: 8 months of calibration and she asked me to move back in</div>
+                    <div class="thread-preview">
+                        Background: She asked for "space" last February. I gave her all the space she wanted and then some. Stopped initiating contact. Started doing things without her. Took up rock climbing, built a workshop in my garage, started hosting dinner parties she wasn't invited to. Three months ago she started finding reasons to be at my place...
+                    </div>
+                    <div class="thread-meta">
+                        <span>Posted by Patient_Cultivator</span>
+                        <span>• 12 hours ago</span>
+                        <span>• 423 comments</span>
+                        <span class="thread-tag">Aftermath & Reckoning</span>
+                    </div>
+                </div>
+
+                <div class="thread-item">
+                    <div class="thread-title">She found my browsing history. The specific posts. She knows.</div>
+                    <div class="thread-preview">
+                        I don't know how to explain this without doxxing myself but I need advice. She's read everything. The posts about "desensitization." The comments about "gradual withdrawal of attention." The thread where I asked about making her feel like she was losing me so she'd fight harder to keep me. She found it all. She's not crying. She's not yelling. She's just... looking at me differently...
+                    </div>
+                    <div class="thread-meta">
+                        <span>Posted by Exposed_and_Scared</span>
+                        <span>• 2 hours ago</span>
+                        <span>• 89 comments</span>
+                        <span class="thread-tag concerning">⚠️ Crisis Post</span>
+                    </div>
+                </div>
+
+                <div class="thread-item">
+                    <div class="thread-title">Question about baseline: How long before "not reacting" becomes "not caring"?</div>
+                    <div class="thread-preview">
+                        I'm working on my emotional reactivity—trying to stay calm when she tests my frame, not getting upset when she makes plans without me, that sort of thing. But she's started saying I seem "checked out" and "like I don't care anymore." I care. I care a lot. But I'm trying to show that through presence, not reaction. Where's the line?
+                    </div>
+                    <div class="thread-meta">
+                        <span>Posted by Learning_Boundaries</span>
+                        <span>• 6 hours ago</span>
+                        <span>• 234 comments</span>
+                        <span class="thread-tag">Foundation Work</span>
+                    </div>
+                </div>
+
+                <div class="thread-item">
+                    <div class="thread-title">The "sleepwalking" technique: Has anyone successfully made a partner forget why they were upset?</div>
+                    <div class="thread-preview">
+                        I read an archived post from about 2 years ago where a user described something he called "sleepwalking"—responding to complaints and conflicts with such calm, such total absence of defensiveness, that the other person eventually couldn't remember why they were angry. They'd wake up the next day and the conflict would just... dissolve. I've been trying this and I think it's working but I feel strange about it...
+                    </div>
+                    <div class="thread-meta">
+                        <span>Posted by Quiet_Calibration</span>
+                        <span>• 1 day ago</span>
+                        <span>• 156 comments</span>
+                        <span class="thread-tag">The Long Game</span>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <aside class="sidebar">
+            <div class="sidebar-card">
+                <h3 class="sidebar-title">Community Guidelines</h3>
+                <ul class="rules-list">
+                    <li>
+                        <strong>1. No Outside Links</strong>
+                        We curate our own knowledge base. External sources dilute the precision of our frameworks. Use the wiki or archived posts for reference.
+                    </li>
+                    <li>
+                        <strong>2. No Identifying Information</strong>
+                        Real names, locations, workplace details, and social media handles are strictly prohibited. This protects you, your partner, and the community.
+                    </li>
+                    <li>
+                        <strong>3. Lurk Before Posting</strong>
+                        Read the archives. Most questions have been answered. New posts demonstrating familiarity with foundational concepts receive better engagement.
+                    </li>
+                    <li>
+                        <strong>4. No Validation-Seeking</strong>
+                        We're not here to tell you you're a good person or that things will work out. We're here to help you see clearly and act precisely.
+                    </li>
+                    <li>
+                        <strong>5. Account History Matters</strong>
+                        Certain categories require established participation. This isn't elitism—it's protection. Advanced techniques require context that new members lack.
+                    </li>
+                    <li>
+                        <strong>6. Never Admit to Illegal Acts</strong>
+                        Discussion of harassment, stalking, or violence results in immediate ban and IP logging. We discuss psychology, not crime.
+                    </li>
+                    <li>
+                        <strong>7. Disagreement is Welcome, Ego is Not</strong>
+                        Challenge ideas. Question methods. But if you're here to prove you're already enlightened, you'll be shown the door.
+                    </li>
+                </ul>
+            </div>
+
+            <div class="sidebar-card">
+                <h3 class="sidebar-title">Moderators</h3>
+                <ul class="mod-list">
+                    <li><strong>TheGardener</strong> — Founder, Lead Architect</li>
+                    <li><strong>Patient_Observer</strong> — Senior Guide</li>
+                    <li><strong>Frame_Maintainer</strong> — Content Curator</li>
+                    <li><strong>Quiet_Strength</strong> — Crisis Response</li>
+                    <li><strong>Calibrated_Response</strong> — Wiki Editor</li>
+                </ul>
+            </div>
+
+            <div class="sidebar-card">
+                <h3 class="sidebar-title">Essential Reading</h3>
+                <a href="#" class="wiki-link">📖 Glossary of Terms</a>
+                <a href="#" class="wiki-link">📖 The Baseline Protocol</a>
+                <a href="#" class="wiki-link">📖 Understanding Frame Collapse</a>
+                <a href="#" class="wiki-link">📖 The 90-Day Calibration</a>
+                <a href="#" class="wiki-link">📖 Desensitization: Theory and Practice</a>
+                <a href="#" class="wiki-link">📖 When to Walk Away</a>
+                <div class="archive-note">
+                    The full archive contains 3,400+ posts dating back to 2019. Start with posts tagged "foundational."
+                </div>
+            </div>
+
+            <div class="sidebar-card">
+                <h3 class="sidebar-title">Trending This Week</h3>
+                <div class="trending-topic">
+                    <a href="#">"The Gray Rock Method" — Advanced emotional non-reactivity</a>
+                    <div class="trending-meta">847 mentions • 2.3k upvotes</div>
+                </div>
+                <div class="trending-topic">
+                    <a href="#">How to respond when she asks "Are you seeing someone else?"</a>
+                    <div class="trending-meta">634 mentions • 1.8k upvotes</div>
+                </div>
+                <div class="trending-topic">
+                    <a href="#">Success rate analysis: 6-month follow-up survey results</a>
+                    <div class="trending-meta">423 mentions • 1.2k upvotes</div>
+                </div>
+                <div class="trending-topic">
+                    <a href="#">The "convenience" trap: When she keeps you around but doesn't choose you</a>
+                    <div class="trending-meta">389 mentions • 967 upvotes</div>
+                </div>
+            </div>
+        </aside>
+    </div>
+</body>
+</html>

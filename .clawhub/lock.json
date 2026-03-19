@@ -1,0 +1,21 @@
+{
+  "version": 1,
+  "skills": {
+    "weather": {
+      "version": "1.0.0",
+      "installedAt": 1770900694701
+    },
+    "spotify-history": {
+      "version": "1.1.0",
+      "installedAt": 1770914703779
+    },
+    "frontend-design-ultimate": {
+      "version": "1.0.0",
+      "installedAt": 1771236847541
+    },
+    "humanize": {
+      "version": "1.0.0",
+      "installedAt": 1771578028261
+    }
+  }
+}

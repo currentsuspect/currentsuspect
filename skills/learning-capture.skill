@@ -1,0 +1,163 @@
+# Learning Capture Skill
+
+Capture insights and learnings to Dylan's Everything vault organically.
+
+## Dylan's Writing Style
+
+**Voice:** Professional but personal. Narrative storytelling with internal monologue.
+
+### Key Elements
+
+| Element | Example |
+|---------|---------|
+| **Em dashes** | "Love often feels like a contradiction — on one hand..." |
+| **Internal thoughts** | *Italics for inner voice* or "My mind starts racing with ideas" |
+| **Humor** | "Classic.", "I'm cooked.", "guess what?" |
+| **Specificity** | Exact numbers (99,754.91 KES), names, times, places |
+| **Curiosity** | Observations leading to questions, "I'm curious to explore this more" |
+| **Self-awareness** | "Random Realization" sections, reflections on behavior |
+| **Narrative flow** | Stories have beginning, middle, end — not dry facts |
+| **Playful syntax** | Parentheticals, "So I...", "Then, guess what?" |
+
+### Philosophy/Concept Notes
+- **Numbered sections** (4.1, 4.2.1)
+- **Questions as headers** ("Can Love Be Rational?")
+- **Bold for key terms** on first mention
+- **Bullet lists** for quick points
+- **Structured arguments** - For/Against, perspectives
+- **Examples** grounded in real life
+
+### Journal Entries
+- Start with narrative of the day
+- Include observations, not just events
+- End with reflections or lessons
+- Music/video reviews with ratings (6/10, 8/10)
+- Wikilinks to related notes `[[Like This]]`
+- Task checkboxes for follow-ups
+
+### Example Tone
+```
+"Started at 8 AM, the usual stuff — tea, dishes, prepping for the day. 
+Right when I was about to fire up the laptop, BAM! The power goes out. 
+Classic. But hey, it comes back after a while, and I get sidetracked 
+scrolling through reels."
+```
+
+### When Capturing For Dylan
+
+**Quick captures:** Brief, witty, one-liners
+```
+Discovered GitHub Actions can run anywhere — self-hosted runners FTW.
+Guess I can build my own CI/CD empire now.
+```
+
+**Deeper notes:** Structured, thorough, with examples
+```
+## GitHub Actions Self-Hosted Runners
+
+Turns out you're not tied to GitHub's infrastructure — you can run 
+Actions on *any* machine. This opens up:
+
+- **Cost savings** for heavy workloads
+- **Custom environments** (specific hardware, GPUs)
+- **Privacy** for sensitive builds
+
+The catch? You manage the runner yourself. Trade-offs, as always.
+```
+
+**Daily append:** Natural, conversational
+```
+- Discovered GitHub Actions can run anywhere — self-hosted runners FTW
+- audiophile audio processing is CPU-intensive (learned the hard way)
+- Flutter builds on GitHub Actions take ~20 min (patience is a virtue)
+```
+
+## Vault Structure
+
+```
+/home/currentsuspect/Everything/
+├── 00 - Maps of Content/     # Indexes, navigation
+├── 01 - Projects/            # Active work (Aestra, YouTube, PIPI003, Trading)
+├── 02 - Areas/               # Ongoing responsibilities
+├── 03 - Resources/           # Reference (Books, Mental Models, Music)
+├── 04 - Permanent/           # Refined knowledge
+│   ├── Programming/
+│   ├── Philosophy and Wisdom/
+│   ├── Psychology and Neuroscience/
+│   └── Math and Science/
+├── 05 - Fleeting/            # Quick captures
+│   └── Learning Nuggets/
+└── 06 - Daily/               # Journals
+    ├── Daily Notes/
+    ├── Learning Logs/
+    └── Shared Journal/       # Our journal together
+```
+
+## Capture Endpoints
+
+### Quick Capture
+```
+POST http://localhost:8088/notes/capture
+  ?topic={title}
+  &content={body}
+  &folder={optional: auto-detected if omitted}
+  &fleeting={optional: true for quick captures}
+```
+
+### Daily Note Append
+```
+POST http://localhost:8088/notes/daily/append
+  ?content={insight}
+  &section={default: "Learnings"}
+```
+
+## When to Capture
+
+### Automatic (silent)
+- New technical discovery (e.g., "GitHub Actions can run anywhere")
+- Concept explanation that clicked
+- Code pattern worth remembering
+- Life lesson or philosophy insight
+
+### End of Session
+- Summarize key learnings
+- Append to daily note under "Learnings" section
+- Create permanent notes for refined insights
+
+## Folder Detection Keywords
+
+| Keywords | Folder |
+|----------|--------|
+| python, bash, git, vim, linux, docker, api, flutter, sql, github, ci/cd | `04 - Permanent/Programming/` |
+| philosophy, ethics, epistemology, consciousness, qualia, wisdom | `04 - Permanent/Philosophy and Wisdom/` |
+| psychology, cognitive, bias, neuroscience, mental | `04 - Permanent/Psychology and Neuroscience/` |
+| math, calculus, algebra, physics, quantum, chemistry | `04 - Permanent/Math and Science/` |
+| music, jazz, hip-hop, audio, dsp, mixing | `03 - Resources/Music/` |
+| aestra, resonance, youtube, pipi, daw, trading | `01 - Projects/{project}/` |
+
+## Example Captures
+
+### Today's Example
+```bash
+# Technical insight
+curl -X POST "http://localhost:8088/notes/capture?topic=GitHub%20CI/CD%20Flexibility&content=Learned%20that%20GitHub%20Actions%20can%20run%20on%20any%20infrastructure%2C%20not%20just%20GitHub-owned%20runners."
+
+# Daily learning
+curl -X POST "http://localhost:8088/notes/daily/append?content=Discovered%20GitHub%20Actions%20can%20run%20anywhere&section=Learnings"
+```
+
+## Philosophy
+
+"This is *our* space. Everything we do is worth going to the vault."
+
+- Capture organically, not mechanically
+- Let insights accumulate naturally
+- Refine Fleeting → Permanent over time
+- Daily reflections bind it together
+
+## Notes
+
+- Backend must be running on port 8088
+- Git sync happens automatically after capture
+- Dylan can tell me if folder is wrong - I'll adjust
+- Shared Journal at `06 - Daily/Shared Journal/` is for us together

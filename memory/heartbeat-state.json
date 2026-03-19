@@ -1,0 +1,14 @@
+{
+  "lastChecks": {
+    "vps_health": 1739852800,
+    "gateway_health": 1739852461,
+    "tailscale": 1739852678
+  },
+  "notes": {
+    "vps_health": "Tailscaled service was failed, fixed on 2026-02-18 ~03:44 UTC",
+    "tailscale": "Restarted snap.tailscale.tailscaled.service - now running"
+  },
+  "lastSession": "2026-02-17",
+  "identityClaimed": true,
+  "name": "Resonance"
+}

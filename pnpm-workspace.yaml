@@ -1,0 +1,7 @@
+packages:
+  - 'mspy-dashboard'
+  - 'plainsight-digital'
+
+# Shared dependencies across projects
+# Run: pnpm install -r
+# This saves ~40-60% disk space vs npm

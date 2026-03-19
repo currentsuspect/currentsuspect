@@ -1,0 +1,28 @@
+# Invoice
+
+**Invoice Number:** 001  
+**Date Issued:** [INSERT DATE]  
+
+---
+
+### Billed to:
+[CLIENT NAME]  
+[COMPANY, IF RELEVANT]  
+[EMAIL ADDRESS]  
+
+---
+
+### Itemized Costs:
+| Description        | Amount (KES) |
+|--------------------|--------------|
+| Initial Payment    | 5,000        |
+| Final Payment Due  | 5,000        |
+| **Total**          | 10,000       |
+
+---
+
+### Payment Methods:
+- **Bank Info/MPESA:**  [INSERT HERE].
+- Full payment due within [insert] days after final invoice submission.
+
+Thank you for partnering with us! If you have any questions, please reach out.

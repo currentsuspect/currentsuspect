@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NexaCore Solutions — Enterprise Software</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0a0a0f; color: #e0e0e0; }
+    nav { background: #111118; border-bottom: 1px solid #1e1e2e; padding: 0 40px; height: 60px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; }
+    .logo { font-size: 20px; font-weight: 700; color: #6366f1; letter-spacing: -0.5px; }
+    .logo span { color: #e0e0e0; }
+    nav ul { list-style: none; display: flex; gap: 32px; }
+    nav a { color: #9ca3af; text-decoration: none; font-size: 14px; transition: color 0.2s; }
+    nav a:hover { color: #e0e0e0; }
+    .hero { padding: 120px 40px; max-width: 1100px; margin: 0 auto; }
+    .hero-badge { display: inline-block; background: #1e1e3f; color: #818cf8; font-size: 12px; padding: 4px 12px; border-radius: 20px; border: 1px solid #3730a3; margin-bottom: 24px; }
+    h1 { font-size: 56px; font-weight: 800; line-height: 1.1; margin-bottom: 24px; }
+    h1 span { color: #6366f1; }
+    .subtitle { font-size: 18px; color: #9ca3af; max-width: 600px; line-height: 1.6; margin-bottom: 40px; }
+    .cta-group { display: flex; gap: 16px; }
+    .btn { padding: 12px 28px; border-radius: 8px; font-size: 15px; font-weight: 600; cursor: pointer; border: none; text-decoration: none; }
+    .btn-primary { background: #6366f1; color: white; }
+    .btn-secondary { background: transparent; color: #9ca3af; border: 1px solid #374151; }
+    .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; max-width: 1100px; margin: 0 auto; padding: 0 40px 80px; }
+    .stat-card { background: #111118; border: 1px solid #1e1e2e; border-radius: 12px; padding: 32px; }
+    .stat-number { font-size: 36px; font-weight: 800; color: #6366f1; }
+    .stat-label { color: #6b7280; font-size: 14px; margin-top: 4px; }
+    footer { border-top: 1px solid #1e1e2e; padding: 24px 40px; text-align: center; color: #4b5563; font-size: 13px; }
+    /* NOTE TO SELF: remove before prod — staging creds: staging:St4g1ng2024! */
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="logo">Nexa<span>Core</span></div>
+    <ul>
+      <li><a href="/">Home</a></li>
+      <li><a href="/about">About</a></li>
+      <li><a href="/contact">Contact</a></li>
+      <!-- <a href="/staff-portal">Staff</a> -->
+    </ul>
+  </nav>
+
+  <div class="hero">
+    <div class="hero-badge">⚡ Now serving 500+ enterprise clients</div>
+    <h1>Enterprise Software<br>Built to <span>Scale</span></h1>
+    <p class="subtitle">NexaCore delivers mission-critical infrastructure solutions for Fortune 500 companies. Secure, reliable, and always on.</p>
+    <div class="cta-group">
+      <a href="/contact" class="btn btn-primary">Get a Demo</a>
+      <a href="/about" class="btn btn-secondary">Learn More</a>
+    </div>
+  </div>
+
+  <div class="stats">
+    <div class="stat-card">
+      <div class="stat-number">99.99%</div>
+      <div class="stat-label">Uptime SLA</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number">500+</div>
+      <div class="stat-label">Enterprise Clients</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number">24/7</div>
+      <div class="stat-label">Support Coverage</div>
+    </div>
+  </div>
+
+  <footer>
+    &copy; 2024 NexaCore Solutions Inc. All rights reserved. | Built with NexaCore Platform v4.2.1
+  </footer>
+</body>
+</html>

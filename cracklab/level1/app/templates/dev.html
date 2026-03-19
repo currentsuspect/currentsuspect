@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Dev Environment — NexaCore</title>
+  <style>
+    body { font-family: monospace; background: #0a0a0f; color: #e0e0e0; padding: 40px; }
+    h1 { color: #f59e0b; margin-bottom: 20px; }
+    .block { background: #111118; border: 1px solid #1e1e2e; border-radius: 8px; padding: 20px; margin-bottom: 16px; }
+    .label { color: #6b7280; font-size: 12px; margin-bottom: 8px; }
+    .value { color: #a5b4fc; font-size: 14px; }
+    .red { color: #ef4444; }
+  </style>
+</head>
+<body>
+  <h1>⚠ DEV ENVIRONMENT — NOT FOR PUBLIC ACCESS</h1>
+
+  <div class="block">
+    <div class="label">Environment</div>
+    <div class="value">development</div>
+  </div>
+  <div class="block">
+    <div class="label">App Version</div>
+    <div class="value">4.2.1-dev+build.20240115</div>
+  </div>
+  <div class="block">
+    <div class="label">Python Version</div>
+    <div class="value">3.11.4</div>
+  </div>
+  <div class="block">
+    <div class="label">Internal Services</div>
+    <div class="value">
+      db: 10.0.0.5:5432<br>
+      redis: 10.0.0.6:6379<br>
+      queue: 10.0.0.7:5672<br>
+      admin: /admin (internal only)
+    </div>
+  </div>
+  <div class="block">
+    <div class="label red">TODO before prod</div>
+    <div class="value red">
+      - disable this /dev endpoint<br>
+      - remove /backup directory<br>
+      - rotate all credentials in config.bak<br>
+      - fix robots.txt (currently exposes too much)
+    </div>
+  </div>
+</body>
+</html>
