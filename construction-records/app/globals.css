@@ -2,18 +2,63 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+@layer base {
+  :root {
+    /* Light mode - adjusting to a warmer, more construction-like palette */
+    --background: 0 0% 98%;
+    --foreground: 222.2 84% 4.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+    /* Primary: Tilisther Orange (fb923c / bg-orange-400 equivalent) */
+    --primary: 27 96% 61%;
+    --primary-foreground: 0 0% 10%;
+    /* Secondary: Warm Slate/Gray */
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 27 96% 61%;
+    --accent-foreground: 0 0% 10%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 27 96% 61%;
+    --radius: 0.75rem;
+  }
+
+  .dark {
+    /* Dark mode - matching the Tilisther #0a0f17 aesthetic */
+    --background: 218 39% 6%;
+    --foreground: 210 40% 98%;
+    --card: 217 33% 10%;
+    --card-foreground: 210 40% 98%;
+    --popover: 217 33% 10%;
+    --popover-foreground: 210 40% 98%;
+    /* Primary: Tilisther Orange */
+    --primary: 27 96% 61%;
+    --primary-foreground: 0 0% 10%;
+    --secondary: 217 33% 15%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217 33% 15%;
+    --muted-foreground: 215 20.2% 65.1%;
+    --accent: 217 33% 20%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 217 33% 15%;
+    --input: 217 33% 15%;
+    --ring: 27 96% 61%;
+  }
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
 }
