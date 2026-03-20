@@ -5,9 +5,10 @@ import {
   Building2, Users, FileText, DollarSign, TrendingUp, Calendar,
   Menu, X, Plus, Search, MoreVertical, ChevronRight, Phone, Mail, MapPin,
   Receipt, Wallet, Download, Trash2, Edit, CheckSquare, Square, AlertCircle,
-  Printer, FileSpreadsheet, Command, Bell, Clock, AlertTriangle, Mic
+  Printer, FileSpreadsheet, Command, Bell, Clock, AlertTriangle, Mic, LogOut
 } from 'lucide-react'
 import { ThemeToggle } from '@/components/theme-toggle'
+import { signOut, useSession } from 'next-auth/react'
 
 // Navigation items
 const navItems = [
@@ -67,6 +68,9 @@ export default function Home() {
   const [clients, setClients] = useState<any[]>([])
   const [expenses, setExpenses] = useState<any[]>([])
   const [invoices, setInvoices] = useState<any[]>([])
+  
+  // Auth session
+  const { data: session } = useSession()
 
   // Search & Filter states
   const [showSearch, setShowSearch] = useState(false)
@@ -1466,16 +1470,33 @@ export default function Home() {
           </nav>
         </div>
 
-        <div className="absolute bottom-0 left-0 right-0 p-4 border-t border-blue-800 dark:border-gray-800">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 bg-blue-800 dark:bg-gray-800 rounded-full flex items-center justify-center">
-              <Users className="w-5 h-5" />
+        <div className="absolute bottom-0 w-full p-4 border-t border-white/5">
+          <div className="flex items-center gap-3 px-2 py-3 mb-2">
+            <div className="w-8 h-8 rounded-full bg-orange-500/20 flex items-center justify-center overflow-hidden shrink-0">
+              {session?.user?.image ? (
+                <img src={session.user.image} alt="Profile" className="w-full h-full object-cover" />
+              ) : (
+                <span className="text-orange-400 font-bold text-sm">
+                  {session?.user?.name?.charAt(0) || 'A'}
+                </span>
+              )}
             </div>
-            <div>
-              <p className="font-medium text-sm">Admin User</p>
-              <p className="text-blue-300 dark:text-gray-400 text-xs">admin@construction.co</p>
+            <div className="flex-1 min-w-0">
+              <p className="text-sm font-medium text-white truncate">
+                {session?.user?.name || 'Admin'}
+              </p>
+              <p className="text-xs text-slate-400 truncate">
+                {session?.user?.email || 'admin@tilisther.com'}
+              </p>
             </div>
           </div>
+          <button
+            onClick={() => signOut()}
+            className="w-full flex items-center gap-3 px-4 py-2.5 rounded-lg transition-colors text-slate-400 hover:bg-white/5 hover:text-red-400"
+          >
+            <LogOut className="w-5 h-5" />
+            <span>Sign out</span>
+          </button>
         </div>
       </aside>
 
