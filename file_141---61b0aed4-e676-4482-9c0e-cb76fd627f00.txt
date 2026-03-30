@@ -1,0 +1,4 @@
+So, there is a model called Hunter Alpha on OpenRouter.
+I wanted to switch to use that model and test it out and see how good it is at doing certain
+tasks.
+So, give me an example of tests before you switch to it, then switch to it actually.

@@ -1,0 +1,44 @@
+1
+00:00:00,000 --> 00:00:11,040
+Okay, so the vision for the DAW is I'm thinking of making it feel very, like, futuristic,
+
+2
+00:00:11,040 --> 00:00:17,440
+thinking of making it very easy for producers. Like every haddle I've had as a producer,
+
+3
+00:00:17,440 --> 00:00:24,480
+I want it gone. Like I'm thinking of things like geets like saves for things like
+
+4
+00:00:24,560 --> 00:00:32,560
+final v1, final v2, final final v3, you know, like I'm thinking of making serious improvements
+
+5
+00:00:32,560 --> 00:00:40,000
+on the industry and not just be another gimmick DAW, like I want it to be by producers for producers,
+
+6
+00:00:40,000 --> 00:00:48,400
+you know, like make everything that I felt needed a fix, fixable, like begin a friendly, you know,
+
+7
+00:00:48,480 --> 00:00:56,480
+very touch and go, like you see something, you try to drag it, it does something and you get feedback
+
+8
+00:00:56,480 --> 00:01:06,880
+instantly. Not try to be a cockpit at go, at runtime, you know, and very, very high quality sound
+
+9
+00:01:06,880 --> 00:01:13,520
+for low end users, you know, low end users tend to not get the quality of sound, they deserve,
+
+10
+00:01:13,520 --> 00:01:19,600
+like, you know, people need high quality sound and I want them to have that. But I,
+
+11
+00:01:19,600 --> 00:01:25,360
+this is the vision I'm seeing at December 26 for the better for the V1.
+

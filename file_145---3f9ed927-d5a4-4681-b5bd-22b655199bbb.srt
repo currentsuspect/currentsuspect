@@ -1,0 +1,4 @@
+1
+00:00:00,000 --> 00:00:07,760
+Okay, doing this automatically would be a bit complex but doable, doable nonetheless.
+

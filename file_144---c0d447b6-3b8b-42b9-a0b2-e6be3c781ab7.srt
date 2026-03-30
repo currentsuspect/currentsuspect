@@ -1,0 +1,28 @@
+1
+00:00:00,000 --> 00:00:04,320
+Okay, so what I'm thinking is we name it something. So they know that
+
+2
+00:00:05,120 --> 00:00:10,800
+regular saving just saves because it would be very annoying every time you press control S
+
+3
+00:00:11,520 --> 00:00:18,640
+You get that pop-up menu. So we save it something. So they know that they're entering into that mood and quietly in the background
+
+4
+00:00:19,040 --> 00:00:25,680
+The DW does this it saves. It can get you back to that exact version. So it's like
+
+5
+00:00:26,320 --> 00:00:35,600
+And do redo but a very serious and do redo that does it for the whole project. You can go back to when you switched the 8 o'8s when you you know
+
+6
+00:00:36,160 --> 00:00:43,920
+That's which is very fast very effective and that's branch idea you are talking about to be musical
+
+7
+00:00:44,160 --> 00:00:50,720
+It can also apply. Yes, we have the git concepts, but the terminology is musical
+

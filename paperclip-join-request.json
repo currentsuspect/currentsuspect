@@ -1,0 +1,10 @@
+{
+  "requestId": "a5836b43-d59a-48d5-afef-7db858c5613f",
+  "claimSecret": "pcp_claim_24e935cfe43bb2dd49819854a01a6f4c08040820233b79a2",
+  "claimSecretExpiresAt": "2026-04-03T13:11:28.322Z",
+  "claimApiKeyPath": "/api/join-requests/a5836b43-d59a-48d5-afef-7db858c5613f/claim-api-key",
+  "companyId": "fdad4657-87a1-415f-82de-64def8863d85",
+  "agentName": "OpenClaw",
+  "status": "pending_approval",
+  "submittedAt": "2026-03-27T13:11:28.323Z"
+}
