@@ -9,7 +9,7 @@
 - ⚠️ **PM2 services** — NOT running (were on VPS, need recreation)
 - ⚠️ **VPS services** — DOWN (Azure VPS in auto-shutdown)
 
-*Last verified: 2026-03-30 07:22 UTC*
+*Last verified: 2026-03-30 09:36 UTC*
 
 ### At-a-Glance Health
 
@@ -41,17 +41,25 @@ tailscale status         # VPN status
 - Azure `Standard_B1s` in UAE North (downsized from B2als_v2 on 2026-03-30 — cost savings, 1 vCPU / 1GB RAM)
 - Auto-shutdown at 22:00 UTC (01:00 EAT)
 - Wake via: `~/.venvs/az-cli/bin/az vm start --name currentsuspect --resource-group ZT_TGRC`
-- SSH: `ssh -i ~/.openclaw/credentials/vps-4.161.44.125.pem currentsuspect@4.161.44.125`
+- SSH: `ssh -i ~/.ssh/vps-20260330 currentsuspect@4.161.44.125`
 - Tailscale on laptop: `sudo systemctl start tailscaled`
 - **Role:** VPN exit node + file storage (services moved to local laptop)
+- **SSH key:** `~/.ssh/vps-20260330` (generated 2026-03-30 — old PEM key deleted with old VM)
 
 ## Today's Progress (2026-03-30)
 
-- 🖥️ **VPS downsized** — from `Standard_B2als_v2` (8GB) to `Standard_B1s` (1GB) for cost savings
-  - Azure for Students subscription still covers it
-  - VPN + file storage only — services on local laptop now
+- 🖥️ **VPS rebuilt from scratch** — old VM deleted, fresh Ubuntu 22.04 on B1s
+  - SSH key: `~/.ssh/vps-20260330` (new)
+  - Tailscale installed — waiting for auth key from Dylan to connect to Tailnet
+  - Storage: 29GB OS disk (6% used), `/mnt` 4GB temp disk for file storage
+- 💾 **Workspace git recovered** — accidentally deleted content recovered from local git
+  - Recovered: `construction-records` → pushed to `construction-records-v2`
+  - Recovered: `plainsight-construction-funnel` → pushed to `tilisther`
+  - Workspace git remote fixed → now `currentsuspect/currentsuspect`
+  - Cleaned up embedded repos, removed 70MB dotfiles-history-scrub
+  - `psd-fresh` (PlainSight Digital cold email) added to workspace
 
-*Last updated: 2026-03-30 07:22 UTC*
+*Last updated: 2026-03-30 09:36 UTC*
 
 ## Yesterday's Progress (2026-03-29)
 
@@ -128,4 +136,4 @@ tailscale status         # VPN status
 
 ---
 
-*Last updated: 2026-03-29 14:48 UTC — Aestra CI green. Azure CLI installed. VPS woken. PSD work in progress.*
+*Last updated: 2026-03-30 09:36 UTC — VPS rebuilt. Workspace git cleaned. Recovered construction-records and tilisther from git.*
