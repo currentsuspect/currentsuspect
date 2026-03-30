@@ -8,11 +8,30 @@
 - Has Firebase experience (will set up FCM for push notifications)
 
 ## Infrastructure
-- VPS: Azure `Standard_B2als_v2` in UAE North, OS disk Premium_LRS 64GB (should downgrade to StandardSSD_LRS to save ~$5/mo)
-- Tailscale networking; VPS reachable at `100.115.33.63`
-- **Phone (Infinix Hot 12 Play)**: Tailscale IP `100.89.84.76`, SSH user `u0_a480`, port `8022`, Termux
-- Auto-shutdown at 22:00 UTC (01:00 EAT) via DevTestLab schedule
-- No auto-start (Azure Automation blocked by subscription policy)
+
+### Local Laptop (Primary — 2026-03-28)
+- **OS:** Arch Linux 6.18.19-lts
+- **CPU:** Intel Core i5-3337U @ 1.80GHz (low-power mobile — use **j2** for builds)
+- **RAM:** 3.7GB — memory-conscious builds
+- **GPU:** Intel HD Graphics 4000
+- **Audio:** PulseAudio on PipeWire ✅
+- **Disk:** 32GB root (36%), 202GB /home (6%)
+- **Sudo password:** stored in `~/.openclaw/credentials/laptop-sudo.json`
+- **Build:** `cd ~/Aestra/build-linux && cmake --build . --target Aestra -j2`
+
+### VPS (Azure) — Secondary
+- Azure `Standard_B2als_v2` in UAE North
+- IP: `4.161.44.125` (public) / `100.115.33.63` (Tailscale)
+- Auto-shutdown at 22:00 UTC (01:00 EAT)
+- **NOTE (2026-03-28):** PM2 processes gone, services down (Resonance API, Blueprint, mSpy Dashboard). Gateway still running on 18789.
+- Tailscale: reachable at `100.115.33.63`
+
+### OpenClaw
+- Gateway running locally on laptop (not VPS)
+- Resonance API not on this machine (was on VPS)
+
+### Phone (Infinix Hot 12 Play)
+- Tailscale IP: `100.89.84.76`, SSH user `u0_a480`, port `8022`, Termux
 - Cloudflare tunnel: `openclaw.currentsuspect.me` → localhost:18789, `ssh.currentsuspect.me` → ssh
 - ttyd on port 7681 (UFW tailscale0 only, basic auth)
 - Backend: `lifeos-api.service` (uvicorn on 0.0.0.0:8088)

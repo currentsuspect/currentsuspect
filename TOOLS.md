@@ -1,6 +1,16 @@
 # TOOLS.md - Environment-Specific Notes
 
-Quick reference for infrastructure, devices, and preferences.
+## Local Laptop (Primary)
+
+| Spec | Value |
+|------|-------|
+| OS | Arch Linux 6.18.19-lts |
+| CPU | Intel i5-3337U @ 1.80GHz (use **j2** for builds) |
+| RAM | 3.7GB — memory-conscious builds |
+| GPU | Intel HD Graphics 4000 |
+| Sudo | Stored in `~/.openclaw/credentials/laptop-sudo.json` |
+
+**Build:** `cmake --build . --target Aestra -j2` (j2, not nproc — only 2 cores)
 
 ## SSH Access
 

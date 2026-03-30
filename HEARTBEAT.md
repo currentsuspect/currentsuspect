@@ -1,6 +1,6 @@
 # HEARTBEAT.md
 
-## Current Status (2026-03-29)
+## Current Status (2026-03-30)
 
 **Machine:** Local laptop (Arch Linux) — primary. VPS is backup/sleeping.
 
@@ -9,7 +9,7 @@
 - ⚠️ **PM2 services** — NOT running (were on VPS, need recreation)
 - ⚠️ **VPS services** — DOWN (Azure VPS in auto-shutdown)
 
-*Last verified: 2026-03-28 20:45 UTC*
+*Last verified: 2026-03-30 07:22 UTC*
 
 ### At-a-Glance Health
 
@@ -38,24 +38,33 @@ tailscale status         # VPN status
 
 ## VPS (Azure) — Secondary / Sleep Mode
 
-- Azure `Standard_B2als_v2` in UAE North
+- Azure `Standard_B1s` in UAE North (downsized from B2als_v2 on 2026-03-30 — cost savings, 1 vCPU / 1GB RAM)
 - Auto-shutdown at 22:00 UTC (01:00 EAT)
-- Wake via Tailscale: `100.115.33.63`
-- SSH key added to authorized_keys (laptop access)
-- Tailscale is OFF on laptop — enable with: `sudo systemctl start tailscaled`
+- Wake via: `~/.venvs/az-cli/bin/az vm start --name currentsuspect --resource-group ZT_TGRC`
+- SSH: `ssh -i ~/.openclaw/credentials/vps-4.161.44.125.pem currentsuspect@4.161.44.125`
+- Tailscale on laptop: `sudo systemctl start tailscaled`
+- **Role:** VPN exit node + file storage (services moved to local laptop)
 
-## Today's Progress (2026-03-29)
+## Today's Progress (2026-03-30)
 
-- 🎛️ **Aestra CI — ALL GREEN!** (fixed 5 commits)
+- 🖥️ **VPS downsized** — from `Standard_B2als_v2` (8GB) to `Standard_B1s` (1GB) for cost savings
+  - Azure for Students subscription still covers it
+  - VPN + file storage only — services on local laptop now
+
+*Last updated: 2026-03-30 07:22 UTC*
+
+## Yesterday's Progress (2026-03-29)
+
+- 🎛️ **Aestra CI — ALL GREEN!** (5 commits)
   - AestraAudio ALIAS→INTERFACE so PUBLIC includes propagate
   - Added all include subdirectories to test targets
   - Fixed DriverRegistryStub MSVC guard (`#ifdef __GNUC__`)
   - Fixed docs broken links (Aestra-* → nomad-*)
   - Added AESTRA_HEADLESS skip for audio tests (Windows CI has no audio hardware)
 - ☁️ **Azure CLI installed** — `~/.venvs/az-cli/bin/az`
-- 🖥️ **VPS briefly woken** — for repo access, back to sleep
+- 🖥️ **VPS woken** — briefly for repo access, auto-shutdown at 22:00 UTC (1h left)
 - 📦 **PSD + aestra-website cloned** — fresh from GitHub to `~/.openclaw/workspace/`
-- 📍 **PSDs admin panel** — work in progress (today's main session topic)
+- 📍 **Aestra docs** — scoping documentation work (aestra.studio + repo docs)
 
 ## Yesterday's Progress (2026-03-28)
 
@@ -119,4 +128,4 @@ tailscale status         # VPN status
 
 ---
 
-*Last updated: 2026-03-29 12:48 UTC — Aestra CI green. Azure CLI installed. VPS briefly woke. PSD work started.*
+*Last updated: 2026-03-29 14:48 UTC — Aestra CI green. Azure CLI installed. VPS woken. PSD work in progress.*

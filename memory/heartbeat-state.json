@@ -1,14 +1,10 @@
 {
   "lastChecks": {
-    "vps_health": 1739852800,
-    "gateway_health": 1739852461,
-    "tailscale": 1739852678
+    "vps": 1743206400,
+    "gateway": 1743206400,
+    "services": 1743206400,
+    "memory": 1743206400
   },
-  "notes": {
-    "vps_health": "Tailscaled service was failed, fixed on 2026-02-18 ~03:44 UTC",
-    "tailscale": "Restarted snap.tailscale.tailscaled.service - now running"
-  },
-  "lastSession": "2026-02-17",
-  "identityClaimed": true,
-  "name": "Resonance"
+  "machine": "laptop",
+  "note": "Switched from VPS to local laptop 2026-03-28. VPS is secondary/backup. Tailscale VPN used for VPS access."
 }
