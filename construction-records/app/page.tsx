@@ -28,35 +28,6 @@ interface Toast {
   type: ToastType
 }
 
-// Initial mock data
-const initialProjects = [
-  { id: 1, name: 'Nairobi Office Complex', client: 'ABC Corp', status: 'In Progress', budget: 850000, spent: 552500, progress: 65, startDate: '2024-01-15', endDate: '2024-06-30' },
-  { id: 2, name: 'Residential Villa', client: 'Mr. Ochieng', status: 'Planning', budget: 1200000, spent: 120000, progress: 10, startDate: '2024-03-01', endDate: '2024-12-31' },
-  { id: 3, name: 'Retail Store Renovation', client: 'XYZ Retail', status: 'Completed', budget: 320000, spent: 315000, progress: 100, startDate: '2023-11-01', endDate: '2024-02-28' },
-  { id: 4, name: 'Warehouse Extension', client: 'Logistics Plus', status: 'In Progress', budget: 650000, spent: 325000, progress: 50, startDate: '2024-02-01', endDate: '2024-08-15' },
-]
-
-const initialClients = [
-  { id: 1, name: 'ABC Corp', email: 'contact@abccorp.co.ke', phone: '+254 712 345 678', address: 'Nairobi, Kenya', projects: 2, totalValue: 850000 },
-  { id: 2, name: 'Mr. Ochieng', email: 'ochieng@email.com', phone: '+254 723 456 789', address: 'Kiambu, Kenya', projects: 1, totalValue: 1200000 },
-  { id: 3, name: 'XYZ Retail', email: 'info@xyzretail.co.ke', phone: '+254 734 567 890', address: 'Nairobi, Kenya', projects: 1, totalValue: 320000 },
-  { id: 4, name: 'Logistics Plus', email: 'admin@logisticsplus.com', phone: '+254 745 678 901', address: 'Mombasa Road, Kenya', projects: 1, totalValue: 650000 },
-]
-
-const initialExpenses = [
-  { id: 1, project: 'Nairobi Office Complex', category: 'Materials', description: 'Cement and steel reinforcement', amount: 125000, date: '2024-03-15', receipt: true },
-  { id: 2, project: 'Nairobi Office Complex', category: 'Labor', description: 'Masonry team - March week 2', amount: 45000, date: '2024-03-14', receipt: true },
-  { id: 3, project: 'Residential Villa', category: 'Permits', description: 'Building permit fees', amount: 25000, date: '2024-03-10', receipt: true },
-  { id: 4, project: 'Warehouse Extension', category: 'Materials', description: 'Roofing materials', amount: 180000, date: '2024-03-08', receipt: false },
-]
-
-const initialInvoices = [
-  { id: 'INV-001', project: 'Nairobi Office Complex', client: 'ABC Corp', amount: 425000, status: 'Paid', issuedDate: '2024-03-01', dueDate: '2024-03-31', paidDate: '2024-03-25' },
-  { id: 'INV-002', project: 'Retail Store Renovation', client: 'XYZ Retail', amount: 320000, status: 'Paid', issuedDate: '2024-02-15', dueDate: '2024-03-15', paidDate: '2024-03-10' },
-  { id: 'INV-003', project: 'Nairobi Office Complex', client: 'ABC Corp', amount: 425000, status: 'Pending', issuedDate: '2024-03-20', dueDate: '2024-04-20', paidDate: null },
-  { id: 'INV-004', project: 'Warehouse Extension', client: 'Logistics Plus', amount: 325000, status: 'Overdue', issuedDate: '2024-02-28', dueDate: '2024-03-30', paidDate: null },
-]
-
 export default function Home() {
   const [currentView, setCurrentView] = useState('dashboard')
   const [sidebarOpen, setSidebarOpen] = useState(false)
@@ -71,6 +42,15 @@ export default function Home() {
   
   // Auth session
   const { data: session } = useSession()
+  const userEmail = session?.user?.email?.toLowerCase() || ''
+  const userRole =
+    userEmail === 'tilistherconstructionandservic@gmail.com'
+      ? 'CEO'
+      : userEmail === 'makoridylan@gmail.com'
+        ? 'Web Dev'
+        : userEmail === 'faithkmutwota@gmail.com'
+          ? 'Virtual Assistant'
+          : 'Team Member'
 
   // Search & Filter states
   const [showSearch, setShowSearch] = useState(false)
@@ -111,7 +91,7 @@ export default function Home() {
 
   // Form states with auto-save
   const [projectForm, setProjectForm] = useState({ name: '', client: '', budget: '', spent: '0', progress: '0', startDate: '', endDate: '', status: 'Planning' })
-  const [clientForm, setClientForm] = useState({ name: '', email: '', phone: '', address: '' })
+  const [clientForm, setClientForm] = useState({ name: '', phone: '', address: '' })
   const [expenseForm, setExpenseForm] = useState({ project: '', category: 'Materials', description: '', amount: '', date: '', receipt: false })
   const [invoiceForm, setInvoiceForm] = useState(() => {
     const d = new Date()
@@ -186,32 +166,33 @@ export default function Home() {
     }, 3000)
   }, [])
 
-  // Fetch data from API
-  useEffect(() => {
-    const fetchData = async () => {
-      setIsLoading(true)
-      try {
-        const [projectsRes, clientsRes, expensesRes, invoicesRes] = await Promise.all([
-          fetch('/api/projects'),
-          fetch('/api/clients'),
-          fetch('/api/expenses'),
-          fetch('/api/invoices')
-        ])
+  const refreshData = useCallback(async (showErrorToast = true) => {
+    setIsLoading(true)
+    try {
+      const [projectsRes, clientsRes, expensesRes, invoicesRes] = await Promise.all([
+        fetch('/api/projects'),
+        fetch('/api/clients'),
+        fetch('/api/expenses'),
+        fetch('/api/invoices')
+      ])
 
-        if (projectsRes.ok) setProjects(await projectsRes.json())
-        if (clientsRes.ok) setClients(await clientsRes.json())
-        if (expensesRes.ok) setExpenses(await expensesRes.json())
-        if (invoicesRes.ok) setInvoices(await invoicesRes.json())
-      } catch (error) {
-        console.error('Error fetching data:', error)
+      if (projectsRes.ok) setProjects(await projectsRes.json())
+      if (clientsRes.ok) setClients(await clientsRes.json())
+      if (expensesRes.ok) setExpenses(await expensesRes.json())
+      if (invoicesRes.ok) setInvoices(await invoicesRes.json())
+    } catch (error) {
+      console.error('Error fetching data:', error)
+      if (showErrorToast) {
         showToast('Failed to load data from server', 'error')
-      } finally {
-        setIsLoading(false)
       }
+    } finally {
+      setIsLoading(false)
     }
-
-    fetchData()
   }, [showToast])
+
+  useEffect(() => {
+    refreshData(false)
+  }, [refreshData])
 
   // Confirm dialog helper
   const confirm = (message: string, action: () => void) => {
@@ -222,8 +203,66 @@ export default function Home() {
 
   // CSV Export
   const exportToCSV = (data: any[], filename: string) => {
-    const headers = Object.keys(data[0]).join(',')
-    const rows = data.map(row => Object.values(row).join(','))
+    if (data.length === 0) {
+      showToast('No records to export', 'warning')
+      return
+    }
+
+    const exportData =
+      filename === 'projects'
+        ? data.map(project => ({
+            id: project.id,
+            name: project.name,
+            client: project.client,
+            status: project.status,
+            budget: project.budget,
+            spent: project.spent,
+            balance: project.balance ?? project.budget - project.spent,
+            progress: project.progress,
+            startDate: project.startDate,
+            endDate: project.endDate,
+          }))
+        : filename === 'clients'
+          ? data.map(client => ({
+              id: client.id,
+              name: client.name,
+              email: client.email,
+              phone: client.phone,
+              address: client.address,
+              projects: client.projects,
+              totalValue: client.totalValue,
+              totalSpent: client.totalSpent ?? 0,
+              balance: client.balance ?? client.totalValue,
+            }))
+          : filename === 'expenses'
+            ? data.map(expense => ({
+                id: expense.id,
+                project: expense.project,
+                category: expense.category,
+                description: expense.description,
+                amount: expense.amount,
+                date: expense.date,
+                receipt: expense.receipt ? 'Yes' : 'No',
+              }))
+            : filename === 'invoices'
+              ? data.map(invoice => ({
+                  id: invoice.id,
+                  client: invoice.client,
+                  project: invoice.project,
+                  amount: invoice.amount,
+                  status: invoice.status,
+                  issuedDate: invoice.issuedDate,
+                  dueDate: invoice.dueDate,
+                  paidDate: invoice.paidDate ?? '',
+                }))
+              : data
+
+    const headers = Object.keys(exportData[0]).join(',')
+    const rows = exportData.map((row) =>
+      Object.values(row)
+        .map((value) => `"${String(value ?? '').replace(/"/g, '""')}"`)
+        .join(',')
+    )
     const csv = [headers, ...rows].join('\n')
     const blob = new Blob([csv], { type: 'text/csv' })
     const url = window.URL.createObjectURL(blob)
@@ -373,11 +412,7 @@ export default function Home() {
         })
 
         if (response.ok) {
-          setInvoices(prev => prev.map(i =>
-            selectedInvoices.includes(i.id)
-              ? { ...i, status: 'Paid', paidDate: new Date().toISOString().split('T')[0] }
-              : i
-          ))
+          await refreshData(false)
           setSelectedInvoices([])
           setSelectAll(false)
           showToast(`${selectedInvoices.length} invoices marked as paid`, 'success')
@@ -411,8 +446,8 @@ export default function Home() {
       })
 
       if (response.ok) {
-        const newProject = await response.json()
-        setProjects([...projects, { ...newProject, client: projectForm.client }])
+        await response.json()
+        await refreshData(false)
         setProjectForm({ name: '', client: '', budget: '', spent: '0', progress: '0', startDate: '', endDate: '', status: 'Planning' })
         localStorage.removeItem('draft_project')
         setShowNewProjectModal(false)
@@ -437,9 +472,9 @@ export default function Home() {
       })
 
       if (response.ok) {
-        const newClient = await response.json()
-        setClients([...clients, { ...newClient, projects: 0, totalValue: 0 }])
-        setClientForm({ name: '', email: '', phone: '', address: '' })
+        await response.json()
+        await refreshData(false)
+        setClientForm({ name: '', phone: '', address: '' })
         localStorage.removeItem('draft_client')
         setShowNewClientModal(false)
         showToast('Client added successfully!', 'success')
@@ -470,19 +505,12 @@ export default function Home() {
       })
 
       if (response.ok) {
-        const newExpense = await response.json()
-        setExpenses([...expenses, { ...newExpense, project: expenseForm.project }])
+        await response.json()
+        await refreshData(false)
         setExpenseForm({ project: '', category: 'Materials', description: '', amount: '', date: '', receipt: false })
         localStorage.removeItem('draft_expense')
         setShowNewExpenseModal(false)
         showToast('Expense recorded successfully!', 'success')
-
-        // Update project spent amount in local state
-        setProjects(projects.map(p =>
-          p.name === expenseForm.project
-            ? { ...p, spent: p.spent + parseInt(expenseForm.amount) }
-            : p
-        ))
       } else {
         showToast('Failed to record expense', 'error')
       }
@@ -508,12 +536,8 @@ export default function Home() {
       })
 
       if (response.ok) {
-        const newInvoice = await response.json()
-        setInvoices([...invoices, {
-          ...newInvoice,
-          project: invoiceForm.project,
-          client: invoiceForm.client
-        }])
+        await response.json()
+        await refreshData(false)
         setInvoiceForm({ project: '', client: '', amount: '', dueDate: '' })
         localStorage.removeItem('draft_invoice')
         setShowNewInvoiceModal(false)
@@ -548,8 +572,8 @@ export default function Home() {
       })
 
       if (response.ok) {
-        const updated = await response.json()
-        setProjects(projects.map(p => p.id === updated.id ? { ...updated, client: p.client } : p))
+        await response.json()
+        await refreshData(false)
         setEditingProject(null)
         setProjectForm({ name: '', client: '', budget: '', spent: '0', progress: '0', startDate: '', endDate: '', status: 'Planning' })
         showToast('Project updated successfully!', 'success')
@@ -574,10 +598,10 @@ export default function Home() {
       })
 
       if (response.ok) {
-        const updated = await response.json()
-        setClients(clients.map(c => c.id === updated.id ? { ...updated, projects: c.projects, totalValue: c.totalValue } : c))
+        await response.json()
+        await refreshData(false)
         setEditingClient(null)
-        setClientForm({ name: '', email: '', phone: '', address: '' })
+        setClientForm({ name: '', phone: '', address: '' })
         showToast('Client updated successfully!', 'success')
       } else {
         showToast('Failed to update client', 'error')
@@ -606,8 +630,8 @@ export default function Home() {
       })
 
       if (response.ok) {
-        const updated = await response.json()
-        setExpenses(expenses.map(ex => ex.id === updated.id ? { ...updated, project: ex.project } : ex))
+        await response.json()
+        await refreshData(false)
         setEditingExpense(null)
         setExpenseForm({ project: '', category: 'Materials', description: '', amount: '', date: '', receipt: false })
         showToast('Expense updated successfully!', 'success')
@@ -626,7 +650,7 @@ export default function Home() {
       try {
         const response = await fetch(`/api/projects/${id}`, { method: 'DELETE' })
         if (response.ok) {
-          setProjects(projects.filter(p => p.id !== id))
+          await refreshData(false)
           showToast('Project deleted successfully', 'success')
         } else {
           showToast('Failed to delete project', 'error')
@@ -643,7 +667,7 @@ export default function Home() {
       try {
         const response = await fetch(`/api/clients/${id}`, { method: 'DELETE' })
         if (response.ok) {
-          setClients(clients.filter(c => c.id !== id))
+          await refreshData(false)
           showToast('Client deleted successfully', 'success')
         } else {
           showToast('Failed to delete client', 'error')
@@ -660,7 +684,7 @@ export default function Home() {
       try {
         const response = await fetch(`/api/expenses/${id}`, { method: 'DELETE' })
         if (response.ok) {
-          setExpenses(expenses.filter(ex => ex.id !== id))
+          await refreshData(false)
           showToast('Expense deleted successfully', 'success')
         } else {
           showToast('Failed to delete expense', 'error')
@@ -677,7 +701,7 @@ export default function Home() {
       try {
         const response = await fetch(`/api/invoices/${id}`, { method: 'DELETE' })
         if (response.ok) {
-          setInvoices(invoices.filter(i => i.id !== id))
+          await refreshData(false)
           showToast('Invoice deleted successfully', 'success')
         } else {
           showToast('Failed to delete invoice', 'error')
@@ -1063,6 +1087,16 @@ export default function Home() {
                   <p className="text-xs text-gray-500 dark:text-gray-400">Total Value</p>
                   <p className="font-semibold text-gray-800 dark:text-gray-100">KES {(client.totalValue / 1000).toFixed(0)}K</p>
                 </div>
+                <div>
+                  <p className="text-xs text-gray-500 dark:text-gray-400">Spent</p>
+                  <p className="font-semibold text-gray-800 dark:text-gray-100">KES {((client.totalSpent ?? 0) / 1000).toFixed(0)}K</p>
+                </div>
+                <div>
+                  <p className="text-xs text-gray-500 dark:text-gray-400">Balance</p>
+                  <p className={`font-semibold ${(client.balance ?? 0) < 0 ? 'text-red-600 dark:text-red-400' : 'text-emerald-600 dark:text-emerald-400'}`}>
+                    KES {((client.balance ?? client.totalValue) / 1000).toFixed(0)}K
+                  </p>
+                </div>
               </div>
             </div>
           ))}
@@ -1444,13 +1478,13 @@ export default function Home() {
       )}
 
       {/* Sidebar */}
-      <aside className={`fixed lg:static inset-y-0 left-0 z-50 w-64 bg-[#0a0f17] dark:bg-[#0a0f17] text-white transform transition-transform duration-200 ease-in-out border-r border-white/5 ${sidebarOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}`}>
-        <div className="p-6">
+      <aside className={`fixed lg:static inset-y-0 left-0 z-50 flex h-full w-64 flex-col border-r border-slate-200 bg-gradient-to-b from-slate-50 via-white to-orange-50/60 text-slate-900 transform transition-transform duration-200 ease-in-out dark:border-white/5 dark:from-[#0a0f17] dark:via-[#0d1420] dark:to-[#111927] dark:text-white ${sidebarOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}`}>
+        <div className="flex-1 p-6">
           <div className="flex items-center gap-3 mb-8">
             <Building2 className="w-8 h-8 text-orange-400" />
             <div>
               <h1 className="font-bold text-lg tracking-tight">TILISTHER</h1>
-              <p className="text-orange-300/80 uppercase tracking-widest text-[10px]">Construction</p>
+              <p className="text-orange-600/80 uppercase tracking-widest text-[10px] dark:text-orange-300/80">Construction</p>
             </div>
           </div>
 
@@ -1460,7 +1494,9 @@ export default function Home() {
                 key={item.id}
                 onClick={() => { setCurrentView(item.id); setSidebarOpen(false) }}
                 className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-colors ${
-                  currentView === item.id ? 'bg-orange-500/10 text-orange-400 border border-orange-500/20' : 'text-slate-400 hover:bg-white/5 hover:text-white'
+                  currentView === item.id
+                    ? 'border border-orange-500/20 bg-orange-500/10 text-orange-600 dark:text-orange-400'
+                    : 'text-slate-500 hover:bg-slate-900/5 hover:text-slate-900 dark:text-slate-400 dark:hover:bg-white/5 dark:hover:text-white'
                 }`}
               >
                 <item.icon className="w-5 h-5" />
@@ -1470,8 +1506,9 @@ export default function Home() {
           </nav>
         </div>
 
-        <div className="absolute bottom-0 w-full p-4 border-t border-white/5">
-          <div className="flex items-center gap-3 px-2 py-3 mb-2">
+        <div className="mt-auto w-full border-t border-slate-200 bg-white/70 p-4 backdrop-blur-sm dark:border-white/5 dark:bg-white/0">
+          <div className="rounded-2xl border border-slate-200/80 bg-white/80 px-3 py-3 shadow-sm dark:border-white/10 dark:bg-white/5">
+            <div className="flex items-start gap-3">
             <div className="w-8 h-8 rounded-full bg-orange-500/20 flex items-center justify-center overflow-hidden shrink-0">
               {session?.user?.image ? (
                 <img src={session.user.image} alt="Profile" className="w-full h-full object-cover" />
@@ -1482,21 +1519,25 @@ export default function Home() {
               )}
             </div>
             <div className="flex-1 min-w-0">
-              <p className="text-sm font-medium text-white truncate">
+              <p className="text-sm font-medium text-slate-900 truncate dark:text-white">
                 {session?.user?.name || 'Admin'}
               </p>
-              <p className="text-xs text-slate-400 truncate">
+              <p className="mt-0.5 text-xs text-slate-500 break-all dark:text-slate-400">
                 {session?.user?.email || 'admin@tilisther.com'}
+              </p>
+              <p className="mt-1.5 inline-flex max-w-full rounded-full bg-orange-500/10 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-[0.14em] text-orange-700 dark:text-orange-300">
+                {userRole}
               </p>
             </div>
           </div>
-          <button
-            onClick={() => signOut()}
-            className="w-full flex items-center gap-3 px-4 py-2.5 rounded-lg transition-colors text-slate-400 hover:bg-white/5 hover:text-red-400"
-          >
-            <LogOut className="w-5 h-5" />
-            <span>Sign out</span>
-          </button>
+            <button
+              onClick={() => signOut()}
+              className="mt-3 flex w-full items-center justify-center gap-2 rounded-xl border border-slate-200 px-3 py-2.5 text-sm font-medium text-slate-600 transition-colors hover:border-red-200 hover:bg-red-50 hover:text-red-600 dark:border-white/10 dark:text-slate-300 dark:hover:bg-white/5 dark:hover:text-red-400"
+            >
+              <LogOut className="w-4 h-4" />
+              <span>Sign out</span>
+            </button>
+          </div>
         </div>
       </aside>
 
@@ -1624,7 +1665,6 @@ export default function Home() {
         <Modal title="Add Client" onClose={() => setShowNewClientModal(false)}>
           <form onSubmit={handleAddClient} className="space-y-4">
             <Input label="Client Name" value={clientForm.name} onChange={v => setClientForm({...clientForm, name: v})} required />
-            <Input label="Email" type="email" value={clientForm.email} onChange={v => setClientForm({...clientForm, email: v})} required />
             <Input label="Phone" value={clientForm.phone} onChange={v => setClientForm({...clientForm, phone: v})} required />
             <Input label="Address" value={clientForm.address} onChange={v => setClientForm({...clientForm, address: v})} required />
 
@@ -1707,7 +1747,9 @@ export default function Home() {
             <Input label="Project Name" value={projectForm.name} onChange={v => setProjectForm({...projectForm, name: v})} required />
             <Select label="Status" value={projectForm.status} onChange={v => setProjectForm({...projectForm, status: v})} options={[{value: 'Planning', label: 'Planning'}, {value: 'In Progress', label: 'In Progress'}, {value: 'Completed', label: 'Completed'}]} />
             <Input label="Budget (KES)" type="number" value={projectForm.budget} onChange={v => setProjectForm({...projectForm, budget: v})} required />
-            <Input label="Spent (KES)" type="number" value={projectForm.spent} onChange={v => setProjectForm({...projectForm, spent: v})} />
+            <div className="rounded-lg border border-dashed border-gray-300 px-3 py-2 text-sm text-gray-600 dark:border-gray-700 dark:text-gray-300">
+              Spent is auto-calculated from recorded expenses: <span className="font-semibold">KES {Number(projectForm.spent || '0').toLocaleString()}</span>
+            </div>
             <Input label="Progress (%)" type="number" min="0" max="100" value={projectForm.progress} onChange={v => setProjectForm({...projectForm, progress: v})} />
             <div className="grid grid-cols-2 gap-4">
               <Input label="Start Date" type="date" value={projectForm.startDate} onChange={v => setProjectForm({...projectForm, startDate: v})} required />
@@ -1726,7 +1768,6 @@ export default function Home() {
         <Modal title="Edit Client" onClose={() => setEditingClient(null)}>
           <form onSubmit={handleEditClient} className="space-y-4">
             <Input label="Client Name" value={clientForm.name} onChange={v => setClientForm({...clientForm, name: v})} required />
-            <Input label="Email" type="email" value={clientForm.email} onChange={v => setClientForm({...clientForm, email: v})} required />
             <Input label="Phone" value={clientForm.phone} onChange={v => setClientForm({...clientForm, phone: v})} required />
             <Input label="Address" value={clientForm.address} onChange={v => setClientForm({...clientForm, address: v})} required />
             <div className="flex gap-3 pt-4">
@@ -1825,7 +1866,12 @@ function ProjectRow({ project, onClick, onEdit, onDelete }: { project: any, onCl
       <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-3">
         <div className="flex-1 min-w-0 cursor-pointer" onClick={onClick}>
           <h3 className="font-medium text-gray-800 dark:text-gray-100 truncate">{project.name}</h3>
-          <p className="text-sm text-gray-500 dark:text-gray-400">{project.client} • Budget: KES {(project.budget / 1000).toFixed(0)}K</p>
+          <p className="text-sm text-gray-500 dark:text-gray-400">{project.client}</p>
+          <div className="mt-2 flex flex-wrap gap-x-4 gap-y-1 text-xs">
+            <span className="text-gray-500 dark:text-gray-400">Budget: <span className="font-medium text-gray-700 dark:text-gray-200">KES {(project.budget / 1000).toFixed(0)}K</span></span>
+            <span className="text-gray-500 dark:text-gray-400">Spent: <span className="font-medium text-gray-700 dark:text-gray-200">KES {(project.spent / 1000).toFixed(0)}K</span></span>
+            <span className="text-gray-500 dark:text-gray-400">Balance: <span className={`font-medium ${(project.balance ?? project.budget - project.spent) < 0 ? 'text-red-600 dark:text-red-400' : 'text-emerald-600 dark:text-emerald-400'}`}>KES {((project.balance ?? project.budget - project.spent) / 1000).toFixed(0)}K</span></span>
+          </div>
         </div>
         <div className="flex items-center gap-3">
           <span className={`px-3 py-1 rounded-full text-xs font-medium whitespace-nowrap ${statusColors[project.status] || 'bg-gray-100'}`}>
