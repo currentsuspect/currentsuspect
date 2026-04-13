@@ -732,7 +732,6 @@ export default function Home() {
     setEditingClient(client)
     setClientForm({
       name: client.name,
-      email: client.email,
       phone: client.phone,
       address: client.address
     })
@@ -1665,8 +1664,8 @@ export default function Home() {
         <Modal title="Add Client" onClose={() => setShowNewClientModal(false)}>
           <form onSubmit={handleAddClient} className="space-y-4">
             <Input label="Client Name" value={clientForm.name} onChange={v => setClientForm({...clientForm, name: v})} required />
-            <Input label="Phone" value={clientForm.phone} onChange={v => setClientForm({...clientForm, phone: v})} required />
-            <Input label="Address" value={clientForm.address} onChange={v => setClientForm({...clientForm, address: v})} required />
+            <Input label="Phone" value={clientForm.phone} onChange={v => setClientForm({...clientForm, phone: v})} />
+            <Input label="Address" value={clientForm.address} onChange={v => setClientForm({...clientForm, address: v})} />
 
             <div className="flex gap-3 pt-4">
               <button type="button" onClick={() => setShowNewClientModal(false)} className="flex-1 px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:bg-gray-950">Cancel</button>
@@ -1768,8 +1767,8 @@ export default function Home() {
         <Modal title="Edit Client" onClose={() => setEditingClient(null)}>
           <form onSubmit={handleEditClient} className="space-y-4">
             <Input label="Client Name" value={clientForm.name} onChange={v => setClientForm({...clientForm, name: v})} required />
-            <Input label="Phone" value={clientForm.phone} onChange={v => setClientForm({...clientForm, phone: v})} required />
-            <Input label="Address" value={clientForm.address} onChange={v => setClientForm({...clientForm, address: v})} required />
+            <Input label="Phone" value={clientForm.phone} onChange={v => setClientForm({...clientForm, phone: v})} />
+            <Input label="Address" value={clientForm.address} onChange={v => setClientForm({...clientForm, address: v})} />
             <div className="flex gap-3 pt-4">
               <button type="button" onClick={() => setEditingClient(null)} className="flex-1 px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800">Cancel</button>
               <button type="submit" className="flex-1 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">Save Changes</button>
