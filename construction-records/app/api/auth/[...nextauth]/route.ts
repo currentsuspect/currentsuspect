@@ -1,36 +1,67 @@
-import NextAuth, { NextAuthOptions } from "next-auth"
+import NextAuth from "next-auth"
+import type { NextAuthOptions } from "next-auth"
 import GoogleProvider from "next-auth/providers/google"
 
-// List of allowed emails (whitelist)
-const ALLOWED_EMAILS = [
+function envValue(name: string) {
+  return process.env[name]?.trim() ?? ""
+}
+
+const DEFAULT_ALLOWED_EMAILS = [
   "tilistherconstructionandservic@gmail.com",
-  "makoridylan@gmail.com", 
-  "99niccur@gmail.com",
-  "darealgopher@gmail.com" // You can add more here later
+  "makoridylan@gmail.com",
+  "faithkmutwota@gmail.com",
 ]
 
-export const authOptions: NextAuthOptions = {
+const ALLOWED_EMAILS = Array.from(
+  new Set(
+    [
+      ...DEFAULT_ALLOWED_EMAILS,
+      ...(process.env.ALLOWED_EMAILS ?? "")
+        .split(",")
+        .map((email) => email.trim().toLowerCase())
+        .filter(Boolean),
+    ].map((email) => email.toLowerCase())
+  )
+)
+
+const authOptions: NextAuthOptions = {
   providers: [
     GoogleProvider({
-      clientId: process.env.GOOGLE_CLIENT_ID || "",
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET || "",
+      clientId: envValue("GOOGLE_CLIENT_ID"),
+      clientSecret: envValue("GOOGLE_CLIENT_SECRET"),
     }),
   ],
   callbacks: {
     async signIn({ user }) {
-      // Check if user's email is in the whitelist
-      if (user.email && ALLOWED_EMAILS.includes(user.email.toLowerCase())) {
-        return true
-      } else {
-        // Return false to deny access
-        console.log(`Access denied for: ${user.email}`)
-        return false // Will redirect to an error page by default
+      if (!user.email) {
+        return false
       }
-    }
+
+      if (ALLOWED_EMAILS.includes(user.email.toLowerCase())) {
+        return true
+      }
+
+      console.log(`Access denied for: ${user.email}`)
+      return false
+    },
+    async jwt({ token, user }) {
+      if (user?.email) {
+        token.email = user.email
+      }
+
+      return token
+    },
+    async session({ session, token }) {
+      if (session.user && token.email) {
+        session.user.email = token.email as string
+      }
+
+      return session
+    },
   },
   pages: {
-    signIn: '/login',
-    error: '/login?error=AccessDenied', // Redirect to login with error if not whitelisted
+    signIn: "/login",
+    error: "/login",
   },
   session: {
     strategy: "jwt",

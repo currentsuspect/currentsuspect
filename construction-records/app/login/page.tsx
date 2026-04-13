@@ -2,18 +2,26 @@
 
 import { signIn, useSession } from "next-auth/react"
 import { Building2 } from "lucide-react"
+import { useRouter } from "next/navigation"
 import { useSearchParams } from "next/navigation"
-import { Suspense } from "react"
+import { Suspense, useEffect } from "react"
 
 function LoginContent() {
   const { data: session, status } = useSession()
+  const router = useRouter()
   const searchParams = useSearchParams()
   const error = searchParams?.get("error")
+  const callbackUrl = searchParams?.get("callbackUrl") || "/"
 
-  // If already logged in, redirect handled by middleware/wrapper
+  useEffect(() => {
+    if (status === "authenticated" && session) {
+      router.replace(callbackUrl)
+    }
+  }, [callbackUrl, router, session, status])
+
   if (status === "authenticated") {
     return (
-      <div className="min-h-screen bg-[#0a0f17] flex items-center justify-center text-white">
+      <div className="min-h-screen flex items-center justify-center bg-[radial-gradient(circle_at_top_right,rgba(251,146,60,0.16),transparent_28%),linear-gradient(180deg,#fff7ed_0%,#ffffff_48%,#f8fafc_100%)] text-slate-900 dark:bg-[radial-gradient(circle_at_top_right,rgba(255,138,61,0.18),transparent_30%),linear-gradient(180deg,#0a0f17_0%,#0f1724_45%,#111927_100%)] dark:text-white">
         <div className="animate-pulse flex flex-col items-center">
           <Building2 className="w-12 h-12 text-orange-400 mb-4 animate-bounce" />
           <p>Redirecting to dashboard...</p>
@@ -24,23 +32,29 @@ function LoginContent() {
 
   return (
     <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md relative z-10">
-      <div className="bg-slate-900/80 backdrop-blur-xl py-8 px-4 shadow-2xl border border-white/10 sm:rounded-[2rem] sm:px-10">
+      <div className="border border-slate-200/80 bg-white/85 py-8 px-4 shadow-2xl backdrop-blur-xl sm:rounded-[2rem] sm:px-10 dark:border-white/10 dark:bg-slate-900/80">
         
         {error === 'AccessDenied' && (
-          <div className="bg-red-500/10 border border-red-500/20 text-red-400 p-4 rounded-xl mb-6 text-sm text-center">
+          <div className="bg-red-500/10 border border-red-500/20 text-red-600 dark:text-red-400 p-4 rounded-xl mb-6 text-sm text-center">
             Access Denied. You do not have permission to view this portal.
           </div>
         )}
 
+        {error === 'Configuration' && (
+          <div className="bg-red-500/10 border border-red-500/20 text-red-600 dark:text-red-400 p-4 rounded-xl mb-6 text-sm text-center">
+            Google OAuth is not configured yet. Add the required environment variables and restart the app.
+          </div>
+        )}
+
         <div className="text-center mb-8">
-          <h3 className="text-lg font-medium text-slate-200">Secure Access</h3>
-          <p className="text-sm text-slate-400 mt-2">Sign in with your authorized Google account to view projects and invoices.</p>
+          <h3 className="text-lg font-medium text-slate-900 dark:text-slate-200">Secure Access</h3>
+          <p className="text-sm text-slate-600 mt-2 dark:text-slate-400">Sign in with your authorized Google account to view projects and invoices.</p>
         </div>
 
         <div>
           <button
-            onClick={() => signIn('google', { callbackUrl: '/' })}
-            className="w-full flex items-center justify-center gap-3 py-3.5 px-4 border border-white/10 rounded-xl shadow-sm bg-white text-gray-900 font-semibold hover:bg-gray-50 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500 focus:ring-offset-slate-900"
+            onClick={() => signIn('google', { callbackUrl })}
+            className="w-full flex items-center justify-center gap-3 py-3.5 px-4 border border-slate-200 rounded-xl shadow-sm bg-white text-gray-900 font-semibold hover:bg-gray-50 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500 focus:ring-offset-white dark:border-white/10 dark:focus:ring-offset-slate-900"
           >
             <svg className="w-5 h-5" viewBox="0 0 24 24">
               <path
@@ -70,10 +84,9 @@ function LoginContent() {
 
 export default function LoginPage() {
   return (
-    <div className="min-h-screen bg-[#0a0f17] text-white flex flex-col justify-center py-12 sm:px-6 lg:px-8 relative overflow-hidden">
-      {/* Background styling matching landing page */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,138,61,0.18),transparent_30%),linear-gradient(180deg,#0a0f17_0%,#0f1724_45%,#111927_100%)]" />
-      <div className="absolute inset-0 opacity-[0.06] [background-image:linear-gradient(rgba(255,255,255,1)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,1)_1px,transparent_1px)] [background-size:30px_30px]" />
+    <div className="min-h-screen text-slate-900 flex flex-col justify-center py-12 sm:px-6 lg:px-8 relative overflow-hidden dark:text-white">
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(251,146,60,0.16),transparent_28%),linear-gradient(180deg,#fff7ed_0%,#ffffff_48%,#f8fafc_100%)] dark:bg-[radial-gradient(circle_at_top_right,rgba(255,138,61,0.18),transparent_30%),linear-gradient(180deg,#0a0f17_0%,#0f1724_45%,#111927_100%)]" />
+      <div className="absolute inset-0 opacity-[0.04] dark:opacity-[0.06] [background-image:linear-gradient(rgba(15,23,42,1)_1px,transparent_1px),linear-gradient(90deg,rgba(15,23,42,1)_1px,transparent_1px)] dark:[background-image:linear-gradient(rgba(255,255,255,1)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,1)_1px,transparent_1px)] [background-size:30px_30px]" />
 
       <div className="sm:mx-auto sm:w-full sm:max-w-md relative z-10">
         <div className="flex justify-center mb-6">
@@ -81,15 +94,15 @@ export default function LoginPage() {
             <Building2 className="w-8 h-8 text-orange-400" />
           </div>
         </div>
-        <h2 className="mt-2 text-center text-3xl font-black tracking-tight text-white">
+        <h2 className="mt-2 text-center text-3xl font-black tracking-tight text-slate-950 dark:text-white">
           TILISTHER
         </h2>
-        <p className="mt-2 text-center text-sm uppercase tracking-widest text-orange-300/80">
+        <p className="mt-2 text-center text-sm uppercase tracking-widest text-orange-700/80 dark:text-orange-300/80">
           Client Portal
         </p>
       </div>
 
-      <Suspense fallback={<div className="text-center mt-10">Loading...</div>}>
+      <Suspense fallback={<div className="text-center mt-10 text-slate-700 dark:text-slate-200">Loading...</div>}>
         <LoginContent />
       </Suspense>
     </div>

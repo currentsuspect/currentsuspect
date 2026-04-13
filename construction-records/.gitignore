@@ -1,1 +1,11 @@
+.next
+.env.local
+.env.vercel.production
 .vercel
+data/records.json
+data/records.db
+data/records.db-shm
+data/records.db-wal
+data/records.lock
+data/records.tmp
+node_modules

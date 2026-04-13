@@ -1,9 +1,7 @@
 import type { Metadata, Viewport } from 'next'
-import { Inter } from 'next/font/google'
 import './globals.css'
+import AuthProvider from '@/components/auth-provider'
 import { ThemeProvider } from '@/components/theme-provider'
-
-const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: 'Tilisther CRM',
@@ -24,10 +22,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={inter.className}>
-        <ThemeProvider>
-          {children}
-        </ThemeProvider>
+      <body className="bg-white text-slate-950 antialiased dark:bg-slate-950 dark:text-slate-50">
+        <AuthProvider>
+          <ThemeProvider>{children}</ThemeProvider>
+        </AuthProvider>
       </body>
     </html>
   )
