@@ -17,6 +17,7 @@ const navItems = [
   { id: 'clients', label: 'Clients', icon: Users },
   { id: 'expenses', label: 'Expenses', icon: Wallet },
   { id: 'invoices', label: 'Invoices', icon: FileText },
+  { id: 'income', label: 'Income', icon: DollarSign },
   { id: 'reports', label: 'Reports', icon: TrendingUp },
 ]
 
@@ -39,6 +40,7 @@ export default function Home() {
   const [clients, setClients] = useState<any[]>([])
   const [expenses, setExpenses] = useState<any[]>([])
   const [invoices, setInvoices] = useState<any[]>([])
+  const [incomes, setIncomes] = useState<any[]>([])
   
   // Auth session
   const { data: session } = useSession()
@@ -72,6 +74,7 @@ export default function Home() {
   const [showNewClientModal, setShowNewClientModal] = useState(false)
   const [showNewExpenseModal, setShowNewExpenseModal] = useState(false)
   const [showNewInvoiceModal, setShowNewInvoiceModal] = useState(false)
+  const [showNewIncomeModal, setShowNewIncomeModal] = useState(false)
   const [showConfirmModal, setShowConfirmModal] = useState(false)
   const [confirmAction, setConfirmAction] = useState<(() => void) | null>(null)
   const [confirmMessage, setConfirmMessage] = useState('')
@@ -98,6 +101,9 @@ export default function Home() {
     d.setDate(d.getDate() + 30)
     return { project: '', client: '', amount: '', dueDate: d.toISOString().split('T')[0] }
   })
+  const [incomeForm, setIncomeForm] = useState(() => {
+    return { amount: '', date: new Date().toISOString().split('T')[0], source: '', notes: '', allocatedTo: '' }
+  })
 
   // Form validation errors
   const [formErrors, setFormErrors] = useState<Record<string, string>>({})
@@ -108,11 +114,13 @@ export default function Home() {
     const savedClient = localStorage.getItem('draft_client')
     const savedExpense = localStorage.getItem('draft_expense')
     const savedInvoice = localStorage.getItem('draft_invoice')
+    const savedIncome = localStorage.getItem('draft_income')
 
     if (savedProject) setProjectForm(JSON.parse(savedProject))
     if (savedClient) setClientForm(JSON.parse(savedClient))
     if (savedExpense) setExpenseForm(JSON.parse(savedExpense))
     if (savedInvoice) setInvoiceForm(JSON.parse(savedInvoice))
+    if (savedIncome) setIncomeForm(JSON.parse(savedIncome))
   }, [])
 
   // Auto-save forms
@@ -132,6 +140,10 @@ export default function Home() {
     localStorage.setItem('draft_invoice', JSON.stringify(invoiceForm))
   }, [invoiceForm])
 
+  useEffect(() => {
+    localStorage.setItem('draft_income', JSON.stringify(incomeForm))
+  }, [incomeForm])
+
   // Keyboard shortcuts
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -147,6 +159,7 @@ export default function Home() {
         setShowNewClientModal(false)
         setShowNewExpenseModal(false)
         setShowNewInvoiceModal(false)
+        setShowNewIncomeModal(false)
       }
       // N for new project
       if (e.key === 'n' && !e.metaKey && !e.ctrlKey && !showSearch) {
@@ -169,17 +182,19 @@ export default function Home() {
   const refreshData = useCallback(async (showErrorToast = true) => {
     setIsLoading(true)
     try {
-      const [projectsRes, clientsRes, expensesRes, invoicesRes] = await Promise.all([
+      const [projectsRes, clientsRes, expensesRes, invoicesRes, incomesRes] = await Promise.all([
         fetch('/api/projects'),
         fetch('/api/clients'),
         fetch('/api/expenses'),
-        fetch('/api/invoices')
+        fetch('/api/invoices'),
+        fetch('/api/incomes'),
       ])
 
       if (projectsRes.ok) setProjects(await projectsRes.json())
       if (clientsRes.ok) setClients(await clientsRes.json())
       if (expensesRes.ok) setExpenses(await expensesRes.json())
       if (invoicesRes.ok) setInvoices(await invoicesRes.json())
+      if (incomesRes.ok) setIncomes(await incomesRes.json())
     } catch (error) {
       console.error('Error fetching data:', error)
       if (showErrorToast) {
@@ -551,6 +566,38 @@ export default function Home() {
     }
   }
 
+  const handleAddIncome = async (e: React.FormEvent) => {
+    e.preventDefault()
+
+    try {
+      const response = await fetch('/api/incomes', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          amount: incomeForm.amount,
+          date: incomeForm.date,
+          source: incomeForm.source || 'Unspecified',
+          notes: incomeForm.notes,
+          allocatedTo: incomeForm.allocatedTo ? projects.find(p => p.name === incomeForm.allocatedTo)?.id : null,
+        })
+      })
+
+      if (response.ok) {
+        await response.json()
+        await refreshData(false)
+        setIncomeForm({ amount: '', date: new Date().toISOString().split('T')[0], source: '', notes: '', allocatedTo: '' })
+        localStorage.removeItem('draft_income')
+        setShowNewIncomeModal(false)
+        showToast('Income logged successfully!', 'success')
+      } else {
+        showToast('Failed to log income', 'error')
+      }
+    } catch (error) {
+      console.error('Error logging income:', error)
+      showToast('Failed to log income', 'error')
+    }
+  }
+
   // Edit handlers
   const handleEditProject = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -713,6 +760,23 @@ export default function Home() {
     })
   }
 
+  const deleteIncome = (id: number) => {
+    confirm('Are you sure you want to delete this income entry?', async () => {
+      try {
+        const response = await fetch(`/api/incomes/${id}`, { method: 'DELETE' })
+        if (response.ok) {
+          await refreshData(false)
+          showToast('Income entry deleted successfully', 'success')
+        } else {
+          showToast('Failed to delete income entry', 'error')
+        }
+      } catch (error) {
+        console.error('Error deleting income:', error)
+        showToast('Failed to delete income entry', 'error')
+      }
+    })
+  }
+
   // Open edit modals
   const openEditProject = (project: any) => {
     setEditingProject(project)
@@ -842,6 +906,7 @@ export default function Home() {
       case 'clients': return renderClients()
       case 'expenses': return renderExpenses()
       case 'invoices': return renderInvoices()
+      case 'income': return renderIncome()
       case 'reports': return renderReports()
       default: return renderDashboard()
     }
@@ -1388,6 +1453,86 @@ export default function Home() {
     )
   }
 
+  function renderIncome() {
+    const totalIncome = incomes.reduce((sum, i) => sum + i.amount, 0)
+    const allocatedIncome = incomes.filter(i => i.allocatedTo).reduce((sum, i) => sum + i.amount, 0)
+    const availableIncome = totalIncome - allocatedIncome
+
+    return (
+      <>
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
+          <div>
+            <h2 className="text-xl lg:text-2xl font-bold text-gray-800 dark:text-gray-100">Income</h2>
+            <p className="text-gray-500 dark:text-gray-400 text-sm mt-1">{incomes.length} entr{incomes.length !== 1 ? 'ies' : 'y'}</p>
+          </div>
+          <div className="flex gap-2">
+            <button onClick={() => setShowNewIncomeModal(true)} className="bg-amber-600 hover:bg-amber-700 text-white px-4 py-2 rounded-lg font-medium flex items-center gap-2">
+              <Plus className="w-4 h-4" /> Log Income
+            </button>
+          </div>
+        </div>
+
+        {/* Summary Cards */}
+        <div className="grid grid-cols-3 gap-3 lg:gap-6 mb-6">
+          <div className="bg-white dark:bg-gray-900 rounded-xl shadow-sm p-4">
+            <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Total Income</p>
+            <p className="text-lg lg:text-2xl font-bold text-emerald-600">KES {totalIncome.toLocaleString()}</p>
+          </div>
+          <div className="bg-white dark:bg-gray-900 rounded-xl shadow-sm p-4">
+            <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Allocated</p>
+            <p className="text-lg lg:text-2xl font-bold text-blue-600">KES {allocatedIncome.toLocaleString()}</p>
+          </div>
+          <div className="bg-white dark:bg-gray-900 rounded-xl shadow-sm p-4">
+            <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Available</p>
+            <p className="text-lg lg:text-2xl font-bold text-amber-600">KES {availableIncome.toLocaleString()}</p>
+          </div>
+        </div>
+
+        {/* Table */}
+        <div className="bg-white dark:bg-gray-900 rounded-xl shadow-sm overflow-hidden">
+          <div className="overflow-x-auto">
+            <table className="w-full">
+              <thead className="bg-gray-50 dark:bg-gray-950 border-b border-gray-200 dark:border-gray-700">
+                <tr>
+                  <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase">Date</th>
+                  <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase">Source</th>
+                  <th className="px-4 py-3 text-right text-xs font-medium text-gray-500 dark:text-gray-400 uppercase">Amount</th>
+                  <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase">Allocated To</th>
+                  <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase">Notes</th>
+                  <th className="px-4 py-3 text-center text-xs font-medium text-gray-500 dark:text-gray-400 uppercase">Actions</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-gray-200">
+                {incomes.map(income => (
+                  <tr key={income.id} className="hover:bg-gray-50 dark:hover:bg-gray-800">
+                    <td className="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">{income.date}</td>
+                    <td className="px-4 py-3 text-sm font-medium text-gray-800 dark:text-gray-100">{income.source}</td>
+                    <td className="px-4 py-3 text-sm font-medium text-emerald-600 text-right">KES {income.amount.toLocaleString()}</td>
+                    <td className="px-4 py-3 text-sm">
+                      {income.allocatedTo ? (
+                        <span className="px-2 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200">
+                          {income.allocatedTo}
+                        </span>
+                      ) : (
+                        <span className="text-gray-400 dark:text-gray-500 text-xs">Unallocated</span>
+                      )}
+                    </td>
+                    <td className="px-4 py-3 text-sm text-gray-600 dark:text-gray-400 max-w-[200px] truncate">{income.notes || '-'}</td>
+                    <td className="px-4 py-3 text-center">
+                      <button onClick={() => deleteIncome(income.id)} className="p-2 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg" title="Delete">
+                        <Trash2 className="w-4 h-4 text-red-500" />
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </>
+    )
+  }
+
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-950 dark:bg-gray-950 flex">
       {/* Toast Notifications */}
@@ -1739,6 +1884,33 @@ export default function Home() {
         </Modal>
       )}
 
+      {/* New Income Modal */}
+      {showNewIncomeModal && (
+        <Modal title="Log Income" onClose={() => setShowNewIncomeModal(false)}>
+          <form onSubmit={handleAddIncome} className="space-y-4">
+            <Input label="Amount (KES)" type="number" value={incomeForm.amount} onChange={v => setIncomeForm({...incomeForm, amount: v})} required />
+
+            <Input label="Date" type="date" value={incomeForm.date} onChange={v => setIncomeForm({...incomeForm, date: v})} required />
+
+            <Input label="Source" value={incomeForm.source} onChange={v => setIncomeForm({...incomeForm, source: v})} placeholder="e.g. Boss, Client Payment, Loan" />
+
+            <Input label="Notes" value={incomeForm.notes} onChange={v => setIncomeForm({...incomeForm, notes: v})} />
+
+            <Select
+              label="Allocate to Project"
+              value={incomeForm.allocatedTo}
+              onChange={v => setIncomeForm({...incomeForm, allocatedTo: v})}
+              options={projects.map(p => ({value: p.name, label: p.name}))}
+            />
+
+            <div className="flex gap-3 pt-4">
+              <button type="button" onClick={() => setShowNewIncomeModal(false)} className="flex-1 px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:bg-gray-950">Cancel</button>
+              <button type="submit" className="flex-1 px-4 py-2 bg-amber-600 text-white rounded-lg hover:bg-amber-700">Log Income</button>
+            </div>
+          </form>
+        </Modal>
+      )}
+
       {/* Edit Project Modal */}
       {editingProject && (
         <Modal title="Edit Project" onClose={() => setEditingProject(null)}>
@@ -1916,7 +2088,7 @@ function Modal({ title, children, onClose }: { title: string, children: React.Re
 }
 
 // Form Components
-function Input({ label, type = 'text', value, onChange, error, required = false, min, max, suffix }: { 
+function Input({ label, type = 'text', value, onChange, error, required = false, min, max, suffix, placeholder }: { 
   label: string, 
   type?: string, 
   value: string, 
@@ -1926,6 +2098,7 @@ function Input({ label, type = 'text', value, onChange, error, required = false,
   min?: string
   max?: string
   suffix?: React.ReactNode
+  placeholder?: string
 }) {
   return (
     <div>
@@ -1936,6 +2109,7 @@ function Input({ label, type = 'text', value, onChange, error, required = false,
           value={value}
           min={min}
           max={max}
+          placeholder={placeholder}
           onChange={(e) => onChange(e.target.value)}
           required={required}
           className={`flex-1 px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-800 dark:border-gray-700 dark:text-gray-100 ${

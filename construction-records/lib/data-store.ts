@@ -50,11 +50,22 @@ type InvoiceRecord = {
   createdAt: string
 }
 
+type IncomeRecord = {
+  id: number
+  amount: number
+  date: string
+  source: string
+  notes: string
+  allocatedTo: number | null
+  createdAt: string
+}
+
 type Database = {
   clients: ClientRecord[]
   projects: ProjectRecord[]
   expenses: ExpenseRecord[]
   invoices: InvoiceRecord[]
+  incomes: IncomeRecord[]
 }
 
 type DataProvider = 'local' | 'supabase' | 'auto'
@@ -247,6 +258,44 @@ const seedData: Database = {
       createdAt: '2024-02-28T00:00:00.000Z',
     },
   ],
+  incomes: [
+    {
+      id: 1,
+      amount: 200000,
+      date: '2024-03-01',
+      source: 'Boss',
+      notes: 'Monthly operating capital',
+      allocatedTo: 1,
+      createdAt: '2024-03-01T00:00:00.000Z',
+    },
+    {
+      id: 2,
+      amount: 150000,
+      date: '2024-03-10',
+      source: 'Boss',
+      notes: 'Materials purchase funds',
+      allocatedTo: 4,
+      createdAt: '2024-03-10T00:00:00.000Z',
+    },
+    {
+      id: 3,
+      amount: 100000,
+      date: '2024-03-15',
+      source: 'Client Payment',
+      notes: 'Advance from Mr. Ochieng',
+      allocatedTo: null,
+      createdAt: '2024-03-15T00:00:00.000Z',
+    },
+    {
+      id: 4,
+      amount: 75000,
+      date: '2024-03-20',
+      source: 'Unspecified',
+      notes: '',
+      allocatedTo: null,
+      createdAt: '2024-03-20T00:00:00.000Z',
+    },
+  ],
 }
 
 async function ensureStore() {
@@ -289,7 +338,12 @@ async function acquireLock() {
 async function readLocalDatabase(): Promise<Database> {
   await ensureStore()
   const raw = await fs.readFile(dataFile, 'utf8')
-  return JSON.parse(raw) as Database
+  const data = JSON.parse(raw) as Database
+  // Ensure incomes array exists for backward compatibility
+  if (!data.incomes) {
+    data.incomes = seedData.incomes
+  }
+  return data
 }
 
 async function writeLocalDatabase(data: Database) {
@@ -309,6 +363,10 @@ async function updateLocalDatabase<T>(updater: (data: Database) => T | Promise<T
   try {
     const raw = await fs.readFile(dataFile, 'utf8')
     const data = JSON.parse(raw) as Database
+    // Ensure incomes array exists for backward compatibility
+    if (!data.incomes) {
+      data.incomes = seedData.incomes
+    }
     const result = await updater(data)
 
     await fs.writeFile(tempFile, JSON.stringify(data, null, 2), 'utf8')
@@ -350,15 +408,16 @@ function shouldUseSupabase() {
 
 async function readSupabaseDatabase(): Promise<Database> {
   const supabase = createSupabaseAdminClient()
-  const [clientsResult, projectsResult, expensesResult, invoicesResult] = await Promise.all([
+  const [clientsResult, projectsResult, expensesResult, invoicesResult, incomesResult] = await Promise.all([
     supabase.from('clients').select('*').order('id', { ascending: true }),
     supabase.from('projects').select('*').order('id', { ascending: true }),
     supabase.from('expenses').select('*').order('id', { ascending: true }),
     supabase.from('invoices').select('*').order('id', { ascending: true }),
+    supabase.from('incomes').select('*').order('id', { ascending: true }),
   ])
 
   const error =
-    clientsResult.error ?? projectsResult.error ?? expensesResult.error ?? invoicesResult.error
+    clientsResult.error ?? projectsResult.error ?? expensesResult.error ?? invoicesResult.error ?? incomesResult.error
 
   if (error) {
     throw error
@@ -406,6 +465,15 @@ async function readSupabaseDatabase(): Promise<Database> {
       paidDate: invoice.paid_date,
       createdAt: invoice.created_at,
     })),
+    incomes: (incomesResult.data ?? []).map((income) => ({
+      id: Number(income.id),
+      amount: Number(income.amount),
+      date: income.date,
+      source: income.source,
+      notes: income.notes,
+      allocatedTo: income.allocated_to ? Number(income.allocated_to) : null,
+      createdAt: income.created_at,
+    })),
   }
 }
 
@@ -434,6 +502,7 @@ async function insertSupabaseRows(table: string, rows: Record<string, unknown>[]
 async function writeSupabaseDatabase(data: Database) {
   await clearSupabaseTable('expenses')
   await clearSupabaseTable('invoices')
+  await clearSupabaseTable('incomes')
   await clearSupabaseTable('projects')
   await clearSupabaseTable('clients')
 
@@ -491,6 +560,19 @@ async function writeSupabaseDatabase(data: Database) {
       due_date: invoice.dueDate,
       paid_date: invoice.paidDate,
       created_at: invoice.createdAt,
+    }))
+  )
+
+  await insertSupabaseRows(
+    'incomes',
+    data.incomes.map((income) => ({
+      id: income.id,
+      amount: income.amount,
+      date: income.date,
+      source: income.source,
+      notes: income.notes,
+      allocated_to: income.allocatedTo,
+      created_at: income.createdAt,
     }))
   )
 }
@@ -655,4 +737,17 @@ export function nextInvoiceId(items: InvoiceRecord[]) {
     items.reduce((max, item) => Math.max(max, Number(item.id.replace('INV-', '')) || 0), 0) + 1
 
   return `INV-${String(nextNumber).padStart(3, '0')}`
+}
+
+export function formatIncomes(data: Database) {
+  const projectsById = projectMap(data)
+
+  return data.incomes
+    .map((income) => ({
+      ...income,
+      allocatedTo: income.allocatedTo
+        ? projectsById.get(income.allocatedTo)?.name ?? 'Unknown Project'
+        : null,
+    }))
+    .sort((a, b) => b.id - a.id)
 }

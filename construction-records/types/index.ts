@@ -55,3 +55,12 @@ export interface Document {
   driveUrl: string
   uploadedAt: Date
 }
+
+export interface Income {
+  id: string
+  amount: number
+  date: string
+  source: string
+  notes: string
+  allocatedTo: string | null
+}
