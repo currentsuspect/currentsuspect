@@ -48,7 +48,20 @@ create index if not exists expenses_project_id_idx on public.expenses(project_id
 create index if not exists invoices_project_id_idx on public.invoices(project_id);
 create index if not exists invoices_client_id_idx on public.invoices(client_id);
 
+create table if not exists public.incomes (
+  id bigint primary key,
+  amount numeric(14, 2) not null default 0,
+  date date not null,
+  source text not null,
+  notes text not null default '',
+  allocated_to bigint null references public.projects(id) on delete set null,
+  created_at timestamptz not null default timezone('utc', now())
+);
+
+create index if not exists incomes_allocated_to_idx on public.incomes(allocated_to);
+
 alter table public.clients enable row level security;
 alter table public.projects enable row level security;
 alter table public.expenses enable row level security;
 alter table public.invoices enable row level security;
+alter table public.incomes enable row level security;
