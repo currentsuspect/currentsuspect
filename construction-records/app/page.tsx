@@ -19,6 +19,8 @@ const navItems = [
   { id: 'invoices', label: 'Invoices', icon: FileText },
   { id: 'income', label: 'Income', icon: DollarSign },
   { id: 'reports', label: 'Reports', icon: TrendingUp },
+  { id: 'database', label: 'Database', icon: FileText },
+  { id: 'recording', label: 'Recording', icon: Mic },
 ]
 
 // Toast type
@@ -908,6 +910,8 @@ export default function Home() {
       case 'invoices': return renderInvoices()
       case 'income': return renderIncome()
       case 'reports': return renderReports()
+      case 'database': return renderDatabase()
+      case 'recording': return renderRecording()
       default: return renderDashboard()
     }
   }
@@ -1401,6 +1405,98 @@ export default function Home() {
                 ))}
               </tbody>
             </table>
+          </div>
+        </div>
+      </>
+    )
+  }
+
+  function renderDatabase() {
+    const docs = projects.flatMap((project: any) => (project.documents || []).map((doc: any) => ({ ...doc, projectName: project.name })))
+    return (
+      <>
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
+          <div>
+            <h2 className="text-xl lg:text-2xl font-bold text-gray-800 dark:text-gray-100">Database</h2>
+            <p className="text-gray-500 dark:text-gray-400 text-sm mt-1">Clients, projects, expenses, invoices, and documents all in one place</p>
+          </div>
+        </div>
+        <div className="grid lg:grid-cols-2 gap-6">
+          <div className="bg-white dark:bg-gray-900 rounded-xl shadow-sm p-4 lg:p-6">
+            <h3 className="font-semibold text-gray-800 dark:text-gray-100 mb-4">Core records</h3>
+            <div className="space-y-3 text-sm">
+              <div className="rounded-lg border border-gray-200 dark:border-gray-700 p-3 flex justify-between"><span>Clients</span><span className="font-semibold">{clients.length}</span></div>
+              <div className="rounded-lg border border-gray-200 dark:border-gray-700 p-3 flex justify-between"><span>Projects</span><span className="font-semibold">{projects.length}</span></div>
+              <div className="rounded-lg border border-gray-200 dark:border-gray-700 p-3 flex justify-between"><span>Expenses</span><span className="font-semibold">{expenses.length}</span></div>
+              <div className="rounded-lg border border-gray-200 dark:border-gray-700 p-3 flex justify-between"><span>Invoices</span><span className="font-semibold">{invoices.length}</span></div>
+              <div className="rounded-lg border border-gray-200 dark:border-gray-700 p-3 flex justify-between"><span>Income records</span><span className="font-semibold">{incomes.length}</span></div>
+            </div>
+          </div>
+          <div className="bg-white dark:bg-gray-900 rounded-xl shadow-sm p-4 lg:p-6">
+            <h3 className="font-semibold text-gray-800 dark:text-gray-100 mb-4">Documents</h3>
+            <div className="space-y-3">
+              {docs.length ? docs.slice(0, 6).map((doc: any) => (
+                <div key={doc.id} className="rounded-lg border border-gray-200 dark:border-gray-700 p-3 text-sm">
+                  <div className="font-medium text-gray-800 dark:text-gray-100">{doc.name}</div>
+                  <div className="text-gray-500 dark:text-gray-400">{doc.projectName} · {doc.type}</div>
+                </div>
+              )) : <div className="text-sm text-gray-500 dark:text-gray-400">No documents recorded yet.</div>}
+            </div>
+          </div>
+        </div>
+      </>
+    )
+  }
+
+  function renderRecording() {
+    const transcriptPreview = [
+      { title: 'Site notes', body: 'Foundation pour moved to Thursday. Need 12 bags cement.' },
+      { title: 'Expense capture', body: 'Paid 18,500 KES for timber delivery from Eastlands.' },
+      { title: 'Client voice memo', body: 'Client wants the gate shifted 1.2 meters left.' },
+    ]
+    return (
+      <>
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
+          <div>
+            <h2 className="text-xl lg:text-2xl font-bold text-gray-800 dark:text-gray-100">Recording</h2>
+            <p className="text-gray-500 dark:text-gray-400 text-sm mt-1">Voice capture, transcriptions, and field notes</p>
+          </div>
+          <button onClick={() => startRecording('quick-note')} className="px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg font-medium flex items-center gap-2">
+            <Mic className="w-4 h-4" /> {isRecording ? 'Recording...' : 'Start Recording'}
+          </button>
+        </div>
+        <div className="grid lg:grid-cols-2 gap-6">
+          <div className="bg-white dark:bg-gray-900 rounded-xl shadow-sm p-4 lg:p-6">
+            <h3 className="font-semibold text-gray-800 dark:text-gray-100 mb-4">Capture</h3>
+            <div className="space-y-4">
+              <div className={`rounded-xl border p-4 ${isRecording ? 'border-red-400 bg-red-50 dark:bg-red-950/20' : 'border-gray-200 dark:border-gray-700'}`}>
+                <div className="flex items-center justify-between">
+                  <div>
+                    <div className="text-sm text-gray-500 dark:text-gray-400">Status</div>
+                    <div className="font-semibold text-gray-800 dark:text-gray-100">{isRecording ? 'Recording live' : 'Idle'}</div>
+                  </div>
+                  <div className={`h-3 w-3 rounded-full ${isRecording ? 'bg-red-500 animate-pulse' : 'bg-gray-400'}`} />
+                </div>
+                <div className="mt-4 text-sm text-gray-600 dark:text-gray-400">Field: {recordingField || 'None'}</div>
+              </div>
+              <div className="space-y-3">
+                {transcriptPreview.map(item => (
+                  <div key={item.title} className="rounded-lg border border-gray-200 dark:border-gray-700 p-3">
+                    <div className="font-medium text-gray-800 dark:text-gray-100">{item.title}</div>
+                    <div className="text-sm text-gray-500 dark:text-gray-400 mt-1">{item.body}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+          <div className="bg-white dark:bg-gray-900 rounded-xl shadow-sm p-4 lg:p-6">
+            <h3 className="font-semibold text-gray-800 dark:text-gray-100 mb-4">Recording actions</h3>
+            <div className="space-y-3 text-sm">
+              <button onClick={() => startRecording('site-note')} className="w-full rounded-lg border border-gray-200 dark:border-gray-700 px-4 py-3 text-left hover:bg-gray-50 dark:hover:bg-gray-800">Record site note</button>
+              <button onClick={() => startRecording('expense-note')} className="w-full rounded-lg border border-gray-200 dark:border-gray-700 px-4 py-3 text-left hover:bg-gray-50 dark:hover:bg-gray-800">Record expense note</button>
+              <button onClick={() => startRecording('client-note')} className="w-full rounded-lg border border-gray-200 dark:border-gray-700 px-4 py-3 text-left hover:bg-gray-50 dark:hover:bg-gray-800">Record client note</button>
+              <button onClick={stopRecording} className="w-full rounded-lg bg-gray-900 text-white dark:bg-gray-100 dark:text-gray-900 px-4 py-3 text-left">Stop recording</button>
+            </div>
           </div>
         </div>
       </>
