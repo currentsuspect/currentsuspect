@@ -1454,7 +1454,7 @@
 <g font-family="Archivo, Inter, 'Helvetica Neue', Arial, sans-serif">
 <text x="64" y="132" font-size="64" font-weight="700" fill="#f1e9de" letter-spacing="-1.5">Dylan Makori</text>
 <rect x="66" y="152" width="72" height="4" rx="2" fill="url(#rule)"/>
-<text x="64" y="204" font-size="24" fill="#b3a797">Producer · Software Engineer · Philosopher</text>
+<text x="64" y="204" font-size="24" fill="#b3a797">Music · Systems · Philosophy</text>
 <text x="64" y="256" font-size="17" fill="#8c8071" letter-spacing="0.4">Building Aestra, a DAW from scratch in C++</text>
 </g>
 </svg>
