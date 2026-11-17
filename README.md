@@ -1,10 +1,10 @@
-<img src="assets/banner.svg" alt="Dylan Makori: producer, software engineer, philosopher" width="100%">
+<img src="assets/banner.svg" alt="Dylan Makori: Music, Systems, Philosophy" width="100%">
 
 <p align="center"><em>Create like the silence is watching.</em></p>
 
 ## Hi, I'm Dylan
 
-I make music, I write software, and I think a lot about why those two feel so alike. Both are about deciding what goes in the silence.
+I make and enjoy music, write software, and I think a lot about why those two feel so alike. Both are about deciding what goes in the silence.
 
 Right now that is one project: **Aestra**, a DAW I'm building from scratch in C++17 for the old laptops and machines that music software usually forgets about.
 
